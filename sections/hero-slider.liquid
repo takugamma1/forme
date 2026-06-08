@@ -8,7 +8,7 @@
   slides → promos → pagination → usp.
 
   Dynamic content binds to section blocks (defined in the schema step):
-    • 'slide' → image + subheading (lead/trail) + heading + description + CTA
+    • 'slide' → image + heading + description + CTA
     • 'promo' → image + label + url   (the "НОВО" / "НОВА КОЛЕКЦИЯ" cards)
     • 'usp'   → icon + text           (bottom feature bar)
 
@@ -65,16 +65,6 @@
         </div>
 
         <div class="hero-slider__content">
-          <p class="hero-slider__subheading">
-            <span class="hero-slider__subheading-text">{{ block.settings.subheading_lead }}</span>
-            <span class="hero-slider__subheading-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 0c.7 5.9 5.4 10.6 11.3 11.3v1.4C17.4 13.4 12.7 18.1 12 24c-.7-5.9-5.4-10.6-11.3-11.3v-1.4C6.6 10.6 11.3 5.9 12 0Z" />
-              </svg>
-            </span>
-            <span class="hero-slider__subheading-text">{{ block.settings.subheading_trail }}</span>
-          </p>
-
           <h2 class="hero-slider__heading">{{ block.settings.heading }}</h2>
 
           <p class="hero-slider__description">{{ block.settings.description }}</p>
@@ -259,25 +249,6 @@
     gap: 1.25rem;
     width: 100%;
     max-width: 36rem;
-  }
-
-  /* ---------- Subheading (text · star · text) ---------- */
-  .hero-slider__subheading {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0;
-    color: var(--hs-text);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .hero-slider__subheading-icon {
-    display: inline-flex;
-    flex: none;
-    color: var(--hs-accent);
   }
 
   /* ---------- Heading (massive H2) ---------- */
@@ -935,8 +906,6 @@
       "limit": 5,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Background image" },
-        { "type": "text", "id": "subheading_lead", "label": "Subheading — before icon", "default": "Тренирай с усещане" },
-        { "type": "text", "id": "subheading_trail", "label": "Subheading — after icon", "default": "Движи се със стил" },
         { "type": "text", "id": "heading", "label": "Heading", "default": "Силата е твоята" },
         { "type": "textarea", "id": "description", "label": "Description", "default": "Създадени за всяка твоя тренировка. Увереност, комфорт и свобода да се движиш точно както искаш." },
         { "type": "text", "id": "cta_label", "label": "Button label", "default": "Разгледай колекцията" },
@@ -971,8 +940,6 @@
           "type": "slide",
           "settings": {
             "heading": "Силата е твоята",
-            "subheading_lead": "Тренирай с усещане",
-            "subheading_trail": "Движи се със стил",
             "description": "Създадени за всяка твоя тренировка. Увереност, комфорт и свобода да се движиш точно както искаш.",
             "cta_label": "Разгледай колекцията"
           }
@@ -981,8 +948,6 @@
           "type": "slide",
           "settings": {
             "heading": "Създадена за движение",
-            "subheading_lead": "Тренирай с усещане",
-            "subheading_trail": "Движи се със стил",
             "description": "Премиум активно облекло, което се движи с теб — на тренировка и извън нея.",
             "cta_label": "Разгледай колекцията"
           }
