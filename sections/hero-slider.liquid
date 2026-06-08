@@ -30,6 +30,7 @@
   aria-label="{{ section.settings.accessibility_label | default: 'Hero' | escape }}"
   {%- if section.settings.autoplay %} data-autoplay-interval="{{ section.settings.autoplay_interval | default: 5 | times: 1000 }}"{% endif %}
 >
+  <div class="hero-slider__main">
   {%- comment -%} ===== SLIDES: per-slide full-bleed media + left-aligned content ===== {%- endcomment -%}
   <div class="hero-slider__slides" aria-live="polite">
     {%- for block in slides -%}
@@ -117,6 +118,7 @@
       {%- endfor -%}
     </div>
   {%- endif -%}
+  </div>
 
   {%- comment -%} ===== PAGINATION: far-right edge (desktop) / bottom row (mobile). One control per slide ===== {%- endcomment -%}
   {%- if slides.size > 1 -%}
@@ -187,24 +189,30 @@
     background-color: #2a0f12;
   }
 
+  /* ---------- Left content column: heading/desc/CTA + promos in normal flow ---------- */
+  .hero-slider__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: safe center;
+    gap: 3rem; /* space between the text/CTA and the promo cards */
+    width: 100%;
+    max-width: 36rem;
+    min-height: 100svh;
+    padding-block-start: calc(var(--hs-header-offset) + 2rem);
+    padding-block-end: 13rem; /* clear the pagination row + USP bar on mobile */
+    padding-inline: var(--hs-inline);
+  }
+
   /* ---------- Slides: stacked layers, cross-fade (JS toggles --active in Step 3) ---------- */
   .hero-slider__slides {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+    display: grid; /* stack all slides in one cell so the column has real height */
+    width: 100%;
   }
 
   .hero-slider__slide {
-    position: absolute;
-    inset: 0;
+    grid-area: 1 / 1;
     isolation: isolate;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding-block-start: calc(var(--hs-header-offset) + 2rem);
-    padding-block-end: 9rem;
-    padding-inline: var(--hs-inline);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.6s ease, visibility 0s linear 0.6s;
@@ -248,7 +256,6 @@
     align-items: flex-start;
     gap: 1.25rem;
     width: 100%;
-    max-width: 36rem;
   }
 
   /* ---------- Heading (massive H2) ---------- */
@@ -322,13 +329,14 @@
       min-height: 100vh;
     }
 
-    .hero-slider__slide {
-      padding-block-end: 15rem; /* room for promo cards + USP bar (Part 2) */
+    .hero-slider__main {
+      max-width: 44rem;
+      min-height: 100vh;
+      padding-block-end: 8rem; /* desktop: only the USP bar sits at the bottom */
     }
 
     .hero-slider__content {
       gap: 1.75rem;
-      max-width: 41rem;
     }
 
     .hero-slider__heading {
@@ -360,24 +368,14 @@
     display: none;
   }
 
-  /* Mobile: widen the content's bottom safe-area so it clears the 3 stacked bands */
-  @media screen and (max-width: 749px) {
-    .hero-slider__slide {
-      padding-block-end: 13rem;
-    }
-  }
+  /* (Mobile bottom safe-area now lives on .hero-slider__main) */
 
   /* ----------------------------- PROMO CARDS ----------------------------- */
   /* Mobile base: horizontal scroll-snap row, above pagination + USP */
   .hero-slider__promos {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 5.25rem;
-    z-index: 2;
     display: flex;
     gap: 0.75rem;
-    padding-inline: var(--hs-inline);
+    width: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -549,15 +547,10 @@
 
   /* =========================== DESKTOP (≥ 750px) =========================== */
   @media screen and (min-width: 750px) {
-    /* Promo cards → anchored bottom-left, no scroll */
+    /* Promo cards → larger, no scroll (they sit in the left-column flow) */
     .hero-slider__promos {
-      right: auto;
-      bottom: 5.5rem;
-      width: auto;
-      max-width: min(34rem, 48vw);
       gap: 1rem;
       overflow: visible;
-      padding-inline-end: 0;
     }
 
     .hero-slider__promo {
