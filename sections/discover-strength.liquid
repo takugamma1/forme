@@ -1,142 +1,161 @@
 {%- comment -%}
-  Discover Strength — sections/discover-strength.liquid
-  Two-column split (large desktop): dark message column (two-tone heading +
-  description + optional CTA) on the left, a collection-driven product grid on
-  the right. Below 990px it stacks and the products become a scroll-snap slider.
-  Self-contained: BEM styles + schema below.
+  Discover Strength — full-bleed image-slider carousel.
+  Each slide is a block (background image + left-aligned overlay: heading +
+  optional CTA). Prev/next arrows, swipe, keyboard, optional autoplay.
+  Self-contained: BEM styles, vanilla controller, and schema below.
 {%- endcomment -%}
-
-{%- assign coll = section.settings.collection -%}
-{%- assign count = section.settings.products_count | default: 4 -%}
 
 <section
   class="discover-strength"
-  style="--ds-bg: {{ section.settings.background_color }}; --ds-accent: {{ section.settings.accent_color }};"
+  style="--ds-min-height: {{ section.settings.section_height | default: '72vh' }}; --ds-overlay: {{ section.settings.overlay_opacity | default: 55 | divided_by: 100.0 }};"
+  {%- if section.settings.autoplay %} data-autoplay-interval="{{ section.settings.autoplay_interval | default: 6 | times: 1000 }}"{% endif %}
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.accessibility_label | default: 'Image slider' | escape }}"
 >
-  <div class="discover-strength__message">
-    {%- if section.settings.heading_line_1 != blank or section.settings.heading_line_2 != blank -%}
-      <h2 class="discover-strength__heading">
-        {%- if section.settings.heading_line_1 != blank -%}
-          <span class="discover-strength__heading-1">{{ section.settings.heading_line_1 }}</span>
-        {%- endif -%}
-        {%- if section.settings.heading_line_2 != blank -%}
-          <span class="discover-strength__heading-2">{{ section.settings.heading_line_2 }}</span>
-        {%- endif -%}
-      </h2>
-    {%- endif -%}
-
-    {%- if section.settings.description != blank -%}
-      <div class="discover-strength__description">{{ section.settings.description }}</div>
-    {%- endif -%}
-
-    {%- if section.settings.button_label != blank -%}
-      <a class="discover-strength__button" href="{{ section.settings.button_link | default: '#' }}">
-        <span>{{ section.settings.button_label }}</span>
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
-    {%- endif -%}
-  </div>
-
-  <div class="discover-strength__products">
-    {%- if coll != blank and coll.products.size > 0 -%}
-      {%- for product in coll.products limit: count -%}
-        <a class="discover-strength__product" href="{{ product.url }}">
-          <div class="discover-strength__product-media">
-            {%- if product.featured_image -%}
+  <div class="discover-strength__viewport">
+    <div class="discover-strength__track" aria-live="polite">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign img_loading = 'lazy'
+          assign img_priority = 'low'
+          if forloop.first
+            assign img_loading = 'eager'
+            assign img_priority = 'high'
+          endif
+        -%}
+        <div
+          class="discover-strength__slide{% if forloop.first %} is-active{% endif %}"
+          role="group"
+          aria-roledescription="slide"
+          aria-label="{{ forloop.index }} / {{ section.blocks.size }}"
+          {%- unless forloop.first %} aria-hidden="true"{% endunless %}
+          {{ block.shopify_attributes }}
+        >
+          <div class="discover-strength__media">
+            {%- if block.settings.image != blank -%}
               {{
-                product.featured_image
-                | image_url: width: 900
+                block.settings.image
+                | image_url: width: 3000
                 | image_tag:
-                  loading: 'lazy',
-                  sizes: '(min-width: 990px) 30vw, 70vw',
-                  widths: '320, 480, 640, 800, 900',
-                  class: 'discover-strength__product-image',
-                  alt: product.featured_image.alt | default: product.title
+                  loading: img_loading,
+                  fetchpriority: img_priority,
+                  sizes: '100vw',
+                  widths: '750, 1100, 1500, 2000, 2400, 3000',
+                  class: 'discover-strength__image',
+                  alt: block.settings.image.alt
               }}
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag: 'discover-strength__product-image discover-strength__product-image--placeholder' }}
             {%- endif -%}
           </div>
-          <div class="discover-strength__product-info">
-            <h3 class="discover-strength__product-title">{{ product.title }}</h3>
-            <span class="discover-strength__product-price">{{ product.price | money }}</span>
+
+          <div class="discover-strength__overlay">
+            {%- if block.settings.heading != blank -%}
+              <h2 class="discover-strength__heading">{{ block.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a class="discover-strength__cta" href="{{ block.settings.button_link | default: '#' }}">
+                <span>{{ block.settings.button_label }}</span>
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 12h13m0 0-5-5m5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            {%- endif -%}
           </div>
-        </a>
+        </div>
       {%- endfor -%}
-    {%- else -%}
-      {%- for i in (1..count) -%}
-        <span class="discover-strength__product discover-strength__product--placeholder">
-          <div class="discover-strength__product-media">
-            {%- capture ph -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
-            {{ ph | placeholder_svg_tag: 'discover-strength__product-image discover-strength__product-image--placeholder' }}
-          </div>
-          <div class="discover-strength__product-info">
-            <h3 class="discover-strength__product-title">Примерен продукт</h3>
-            <span class="discover-strength__product-price">{{ 4999 | money }}</span>
-          </div>
-        </span>
-      {%- endfor -%}
+    </div>
+
+    {%- if section.blocks.size > 1 -%}
+      <button type="button" class="discover-strength__nav discover-strength__nav--prev" data-direction="prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button type="button" class="discover-strength__nav discover-strength__nav--next" data-direction="next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
     {%- endif -%}
   </div>
 </section>
 
 {% stylesheet %}
   .discover-strength {
-    --ds-bg: #0d0d0d;
-    --ds-accent: #deff9a;
-
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    isolation: isolate;
   }
 
-  /* ---------- Left message column ---------- */
-  .discover-strength__message {
-    background-color: var(--ds-bg, #0d0d0d);
+  .discover-strength__viewport {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .discover-strength__track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .discover-strength__slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-height: var(--ds-min-height, 72vh);
+    display: flex;
+    align-items: center;
+    isolation: isolate;
+    overflow: hidden;
     color: #fff;
+    background-color: #141414;
+  }
+
+  .discover-strength__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .discover-strength__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* darker on the left so the overlay text stays readable */
+  .discover-strength__slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, var(--ds-overlay, 0.55)) 0%,
+      rgba(0, 0, 0, calc(var(--ds-overlay, 0.55) * 0.5)) 42%,
+      rgba(0, 0, 0, 0) 72%
+    );
+  }
+
+  .discover-strength__overlay {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: clamp(2.5rem, 5vw, 5rem);
+    align-items: flex-start;
+    gap: 1.75rem;
+    width: 100%;
+    max-width: 38rem;
+    padding: clamp(1.5rem, 5vw, 4.5rem);
   }
 
   .discover-strength__heading {
     margin: 0;
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-size: clamp(1.05rem, 2vw, 1.6rem);
   }
 
-  .discover-strength__heading-1 {
-    display: block;
-    color: #fff;
-  }
-
-  .discover-strength__heading-2 {
-    display: block;
-    color: var(--ds-accent, #deff9a);
-  }
-
-  .discover-strength__description {
-    max-width: 38ch;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  .discover-strength__description > :first-child { margin-block-start: 0; }
-  .discover-strength__description > :last-child { margin-block-end: 0; }
-
-  .discover-strength__button {
-    align-self: flex-start;
+  .discover-strength__cta {
     display: inline-flex;
     align-items: center;
     gap: 0.85rem;
-    margin-block-start: 0.5rem;
     padding: 0.95rem 1.5rem;
     border-radius: 8px;
     background: #fff;
@@ -149,136 +168,201 @@
     transition: transform 0.25s ease;
   }
 
-  .discover-strength__button svg {
+  .discover-strength__cta svg {
     transition: transform 0.25s ease;
   }
 
   @media (hover: hover) {
-    .discover-strength__button:hover { transform: translateY(-2px); }
-    .discover-strength__button:hover svg { transform: translateX(4px); }
+    .discover-strength__cta:hover { transform: translateY(-2px); }
+    .discover-strength__cta:hover svg { transform: translateX(4px); }
   }
 
-  /* ---------- Right products: mobile/tablet scroll slider ---------- */
-  .discover-strength__products {
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: clamp(1.25rem, 4vw, 2.5rem);
-  }
-
-  .discover-strength__products::-webkit-scrollbar { display: none; }
-
-  .discover-strength__product {
-    position: relative;
-    flex: 0 0 auto;
-    width: min(70vw, 300px);
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    aspect-ratio: 4 / 5;
-    padding: 1.25rem;
-    border-radius: 12px;
-    overflow: hidden;
-    isolation: isolate;
+  /* ---------- Nav arrows ---------- */
+  .discover-strength__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
     color: #fff;
-    text-decoration: none;
-    background-color: #161616;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
   }
 
-  .discover-strength__product--placeholder {
-    cursor: default;
-  }
-
-  .discover-strength__product-media {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    overflow: hidden;
-  }
-
-  .discover-strength__product-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .discover-strength__product-image--placeholder {
-    background: #1f1f1f;
-    opacity: 0.5;
-  }
-
-  /* angled dark overlay for legibility + the "cut" look */
-  .discover-strength__product::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(157deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.2) 45%, rgba(0, 0, 0, 0.85) 100%);
-  }
-
-  .discover-strength__product-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .discover-strength__product-title {
-    margin: 0;
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.2;
-  }
-
-  .discover-strength__product-price {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--ds-accent, #deff9a);
-  }
+  .discover-strength__nav--prev { left: clamp(0.5rem, 1.5vw, 1.5rem); }
+  .discover-strength__nav--next { right: clamp(0.5rem, 1.5vw, 1.5rem); }
 
   @media (hover: hover) {
-    .discover-strength__product:hover .discover-strength__product-image {
-      transform: scale(1.05);
+    .discover-strength__nav:hover {
+      background: #fff;
+      color: #111;
+      border-color: #fff;
     }
   }
 
-  .discover-strength__product:focus-visible {
-    outline: 2px solid var(--ds-accent, #deff9a);
-    outline-offset: 3px;
-  }
-
-  /* ---------- Large desktop: two-column split + 2-up product grid ---------- */
-  @media screen and (min-width: 990px) {
-    .discover-strength {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      align-items: stretch;
-    }
-
-    .discover-strength__products {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.25rem;
-      overflow: visible;
-    }
-
-    .discover-strength__product {
-      width: auto;
-    }
+  .discover-strength__nav:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .discover-strength__product-image,
-    .discover-strength__button,
-    .discover-strength__button svg {
+    .discover-strength__track,
+    .discover-strength__cta,
+    .discover-strength__cta svg {
       transition: none;
     }
   }
 {% endstylesheet %}
+
+<script>
+  (function () {
+    'use strict';
+
+    /* Re-exec guard: keep document listeners singular across section re-renders. */
+    if (window.DiscoverStrengthSlider) {
+      window.DiscoverStrengthSlider.initAll();
+      return;
+    }
+
+    var SEL = {
+      root: '.discover-strength',
+      track: '.discover-strength__track',
+      slide: '.discover-strength__slide',
+      slideActive: 'is-active',
+      prev: '[data-direction="prev"]',
+      next: '[data-direction="next"]'
+    };
+    var SWIPE_THRESHOLD = 40;
+
+    class DSSlider {
+      constructor(root) {
+        this.root = root;
+        this.track = root.querySelector(SEL.track);
+        this.slides = Array.from(root.querySelectorAll(SEL.slide));
+        this.prevBtn = root.querySelector(SEL.prev);
+        this.nextBtn = root.querySelector(SEL.next);
+        this.ac = new AbortController();
+        this.timer = null;
+        this.index = 0;
+        this.pointerStartX = null;
+        this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var ms = parseInt(root.dataset.autoplayInterval || '0', 10);
+        this.autoplayMs = isNaN(ms) ? 0 : ms;
+      }
+
+      init() {
+        if (this.slides.length === 0) return;
+        this.render(0);
+        if (this.slides.length < 2) return; /* single slide: no nav/autoplay/listeners */
+        var signal = this.ac.signal;
+        var self = this;
+
+        if (this.prevBtn) this.prevBtn.addEventListener('click', function () { self.prev(); self.restart(); }, { signal: signal });
+        if (this.nextBtn) this.nextBtn.addEventListener('click', function () { self.next(); self.restart(); }, { signal: signal });
+
+        this.root.addEventListener('keydown', this.onKeydown, { signal: signal });
+        this.root.addEventListener('pointerdown', this.onPointerDown, { signal: signal });
+        this.root.addEventListener('pointerup', this.onPointerUp, { signal: signal });
+        this.root.addEventListener('pointercancel', this.onPointerCancel, { signal: signal });
+        this.root.addEventListener('mouseenter', this.stop, { signal: signal });
+        this.root.addEventListener('mouseleave', this.start, { signal: signal });
+        this.root.addEventListener('focusin', this.stop, { signal: signal });
+        this.root.addEventListener('focusout', this.start, { signal: signal });
+
+        this.start();
+      }
+
+      onKeydown = (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); this.prev(); this.restart(); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); this.next(); this.restart(); }
+      };
+      onPointerDown = (e) => { if (e.pointerType === 'mouse' && e.button !== 0) return; this.pointerStartX = e.clientX; };
+      onPointerUp = (e) => {
+        if (this.pointerStartX === null) return;
+        var delta = e.clientX - this.pointerStartX;
+        this.pointerStartX = null;
+        if (Math.abs(delta) < SWIPE_THRESHOLD) return;
+        if (delta < 0) this.next(); else this.prev();
+        this.restart();
+      };
+      onPointerCancel = () => { this.pointerStartX = null; };
+
+      goTo(i) { var n = this.slides.length; if (n === 0) return; this.index = ((i % n) + n) % n; this.render(this.index); }
+      next() { this.goTo(this.index + 1); }
+      prev() { this.goTo(this.index - 1); }
+
+      render(i) {
+        if (this.track) this.track.style.transform = 'translateX(' + (-i * 100) + '%)';
+        this.slides.forEach(function (slide, idx) {
+          var active = idx === i;
+          slide.classList.toggle(SEL.slideActive, active);
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+          if ('inert' in slide) slide.inert = !active;
+        });
+      }
+
+      start = () => {
+        if (this.autoplayMs <= 0 || this.slides.length < 2 || this.reducedMotion) return;
+        if (this.timer !== null) return;
+        var self = this;
+        this.timer = window.setInterval(function () { self.next(); }, this.autoplayMs);
+      };
+      stop = () => { if (this.timer !== null) { window.clearInterval(this.timer); this.timer = null; } };
+      restart = () => { this.stop(); this.start(); };
+
+      /* Teardown: clear interval + remove every listener in one abort() */
+      destroy() { this.stop(); this.ac.abort(); }
+    }
+
+    var instances = new Map();
+    function initRoot(root) { if (!root || instances.has(root)) return; var inst = new DSSlider(root); instances.set(root, inst); inst.init(); }
+    function destroyRoot(root) { var inst = instances.get(root); if (!inst) return; inst.destroy(); instances.delete(root); }
+    function sweepDetached() { instances.forEach(function (inst, root) { if (!root.isConnected) { inst.destroy(); instances.delete(root); } }); }
+    function initAll(scope) { sweepDetached(); (scope || document).querySelectorAll(SEL.root).forEach(initRoot); }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { initAll(); }, { once: true });
+    } else {
+      initAll();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      sweepDetached();
+      if (e.target && e.target.querySelectorAll) e.target.querySelectorAll(SEL.root).forEach(initRoot);
+    });
+    document.addEventListener('shopify:section:unload', function (e) {
+      if (e.target && e.target.querySelectorAll) e.target.querySelectorAll(SEL.root).forEach(destroyRoot);
+      sweepDetached();
+    });
+    document.addEventListener('shopify:block:select', function (e) {
+      var root = e.target.closest ? e.target.closest(SEL.root) : null;
+      if (!root) return;
+      var inst = instances.get(root);
+      if (!inst) return;
+      inst.stop();
+      var slide = e.target.closest(SEL.slide);
+      if (slide) { var idx = inst.slides.indexOf(slide); if (idx >= 0) inst.goTo(idx); }
+    });
+    document.addEventListener('shopify:block:deselect', function (e) {
+      var root = e.target.closest ? e.target.closest(SEL.root) : null;
+      if (root && instances.has(root)) instances.get(root).start();
+    });
+    document.addEventListener('visibilitychange', function () {
+      instances.forEach(function (inst) { if (document.hidden) inst.stop(); else inst.start(); });
+    });
+
+    window.DiscoverStrengthSlider = { initAll: initAll, instances: instances };
+  })();
+</script>
 
 {% schema %}
 {
@@ -287,83 +371,77 @@
   "disabled_on": {
     "groups": ["header", "footer"]
   },
+  "max_blocks": 8,
   "settings": [
     {
-      "type": "header",
-      "content": "Message (left column)"
-    },
-    {
       "type": "text",
-      "id": "heading_line_1",
-      "label": "Heading — line 1 (white)",
-      "default": "Открий своята"
+      "id": "accessibility_label",
+      "label": "Slider label (aria-label)",
+      "default": "Image slider"
     },
     {
-      "type": "text",
-      "id": "heading_line_2",
-      "label": "Heading — line 2 (accent)",
-      "default": "Сила"
-    },
-    {
-      "type": "richtext",
-      "id": "description",
-      "label": "Description",
-      "default": "<p>Екипировка, създадена да издържа на всяко предизвикателство – от загрявката до последното повторение. Движи се със сила и увереност.</p>"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label (optional)",
-      "default": "Пазарувай фитнес"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "header",
-      "content": "Products (right column)"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
+      "type": "select",
+      "id": "section_height",
+      "label": "Slide height",
+      "options": [
+        { "value": "56vh", "label": "Small" },
+        { "value": "72vh", "label": "Medium" },
+        { "value": "88vh", "label": "Large" }
+      ],
+      "default": "72vh"
     },
     {
       "type": "range",
-      "id": "products_count",
-      "label": "Products to show",
-      "min": 4,
-      "max": 12,
-      "step": 1,
-      "default": 4
+      "id": "overlay_opacity",
+      "label": "Overlay darkness",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "default": 55
     },
     {
       "type": "header",
-      "content": "Colors"
+      "content": "Autoplay"
     },
     {
-      "type": "color",
-      "id": "background_color",
-      "label": "Message background",
-      "default": "#0d0d0d"
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": false
     },
     {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent colour",
-      "default": "#deff9a"
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Seconds between slides",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6,
+      "visible_if": "{{ section.settings.autoplay }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Background image" },
+        { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Функционални екипи, които работят за теб – във всяко повторение." },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Пазарувай фитнес" },
+        { "type": "url", "id": "button_link", "label": "Button link" }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Discover strength",
-      "settings": {
-        "heading_line_1": "Открий своята",
-        "heading_line_2": "Сила",
-        "products_count": 4
-      }
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide", "settings": { "heading": "Създадена за движение – тренирай без компромис." } },
+        { "type": "slide", "settings": { "heading": "Сила, която носиш със себе си – ден след ден." } }
+      ]
     }
   ]
 }
