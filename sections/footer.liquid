@@ -15,6 +15,17 @@
 {%- capture icon_email -%}<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>{%- endcapture -%}
 
 <div class="footer-custom color-{{ section.settings.color_scheme }}" style="--ft-logo-width: {{ section.settings.logo_width | default: 160 }}px;">
+  {%- if section.settings.image_left != blank -%}
+    <div class="footer-custom__decor footer-custom__decor--left" aria-hidden="true">
+      {{ section.settings.image_left | image_url: width: 800 | image_tag: loading: 'lazy', class: 'footer-custom__decor-image', alt: '' }}
+    </div>
+  {%- endif -%}
+  {%- if section.settings.image_right != blank -%}
+    <div class="footer-custom__decor footer-custom__decor--right" aria-hidden="true">
+      {{ section.settings.image_right | image_url: width: 800 | image_tag: loading: 'lazy', class: 'footer-custom__decor-image', alt: '' }}
+    </div>
+  {%- endif -%}
+
   <div class="footer-custom__top">
     {%- if section.settings.menu_left != blank -%}
       <nav class="footer-custom__menu" aria-label="Footer menu 1">
@@ -95,10 +106,33 @@
   .footer-custom {
     --ft-gutter: clamp(1.25rem, 4vw, 4.5rem);
 
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     background-color: var(--color-background, #f4f1ec);
     color: var(--color-foreground, #1a1a1a);
     padding-block: clamp(2.5rem, 5vw, 4.5rem);
     padding-inline: var(--ft-gutter);
+  }
+
+  /* Decorative circular side images — behind content, desktop only */
+  .footer-custom__decor {
+    display: none;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: clamp(220px, 24vw, 360px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .footer-custom__decor--left { left: 0; transform: translate(-45%, -6%); }
+  .footer-custom__decor--right { right: 0; transform: translate(45%, -6%); }
+  .footer-custom__decor-image { width: 100%; height: 100%; object-fit: cover; }
+
+  @media screen and (min-width: 990px) {
+    .footer-custom__decor { display: block; }
   }
 
   /* ---------- Top: 3-column split ---------- */
@@ -331,6 +365,20 @@
       "id": "email_address",
       "label": "Email address",
       "info": "Used for the mail icon (opens mailto)."
+    },
+    {
+      "type": "header",
+      "content": "Decorative side images (desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": "Left image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": "Right image"
     }
   ]
 }
