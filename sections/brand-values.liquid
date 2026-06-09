@@ -1,0 +1,212 @@
+{%- comment -%}
+  Brand Values — sections/brand-values.liquid
+  Four equal tall image cards with a top-left white text overlay (line breaks
+  controlled via a textarea) and a top-weighted dark gradient for legibility.
+  4-col grid on desktop, horizontal scroll-snap slider on mobile. BEM styles +
+  schema below.
+{%- endcomment -%}
+
+<section
+  class="brand-values color-{{ section.settings.color_scheme }}"
+  style="--bv-radius: {{ section.settings.card_corner_radius | default: 20 }}px;"
+>
+  {%- if section.blocks.size > 0 -%}
+    <ul class="brand-values__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="brand-values__card" {{ block.shopify_attributes }}>
+          <div class="brand-values__media">
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1000
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '(min-width: 990px) 24vw, 72vw',
+                  widths: '320, 480, 640, 800, 1000',
+                  class: 'brand-values__image',
+                  alt: block.settings.image.alt
+              }}
+            {%- else -%}
+              {%- capture phn -%}{% cycle 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+              {{ phn | placeholder_svg_tag: 'brand-values__image brand-values__image--ph' }}
+            {%- endif -%}
+          </div>
+
+          {%- if block.settings.text != blank -%}
+            <div class="brand-values__content">
+              <p class="brand-values__text">{{ block.settings.text | newline_to_br }}</p>
+              <span class="brand-values__line" aria-hidden="true"></span>
+            </div>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .brand-values {
+    --bv-gutter: clamp(1rem, 4vw, 4rem);
+
+    background-color: var(--color-background, #edebe7);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(2.5rem, 5vw, 5rem);
+    padding-inline: var(--bv-gutter);
+  }
+
+  /* ---------- Grid → mobile scroll-snap slider ---------- */
+  .brand-values__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .brand-values__grid::-webkit-scrollbar { display: none; }
+
+  /* ---------- Card ---------- */
+  .brand-values__card {
+    position: relative;
+    flex: 0 0 auto;
+    width: min(72vw, 320px);
+    scroll-snap-align: start;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--bv-radius, 20px);
+    overflow: hidden;
+    isolation: isolate;
+    color: #fff;
+    background-color: #222222;
+  }
+
+  .brand-values__media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .brand-values__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .brand-values__image--ph {
+    object-fit: cover;
+    opacity: 0.5;
+  }
+
+  /* dark gradient, darker at the top for the overlay text */
+  .brand-values__card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.15) 35%, rgba(0, 0, 0, 0) 65%);
+  }
+
+  @media (hover: hover) {
+    .brand-values__card:hover .brand-values__image { transform: scale(1.04); }
+  }
+
+  /* ---------- Top-left text overlay ---------- */
+  .brand-values__content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  .brand-values__text {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .brand-values__line {
+    display: block;
+    width: 1.75rem;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  /* ---------- Desktop: 4-column grid ---------- */
+  @media screen and (min-width: 990px) {
+    .brand-values__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+      overflow: visible;
+    }
+    .brand-values__card { width: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .brand-values__image { transition: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Brand values",
+  "class": "brand-values-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "card_corner_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "info": "Use line breaks (Enter) to control how it stacks.",
+          "default": "Strong\nMind"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand values",
+      "blocks": [
+        { "type": "value", "settings": { "text": "Strong\nMind\nStrong\nBody" } },
+        { "type": "value", "settings": { "text": "Details\nMatter" } },
+        { "type": "value", "settings": { "text": "Focus\nDiscipline\nProgress" } },
+        { "type": "value", "settings": { "text": "Performance\nMeets\nElegance" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
