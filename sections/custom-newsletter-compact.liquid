@@ -1,0 +1,198 @@
+{%- comment -%}
+  Custom Newsletter (compact) — sections/custom-newsletter-compact.liquid
+  A tight, centred newsletter band: heading + short subtext + an integrated
+  pill email form (input + submit button). Uses Shopify's customer form, tags
+  signups as "newsletter", and shows inline success / error messages.
+  BEM styles + schema below.
+{%- endcomment -%}
+
+<section class="newsletter-compact color-{{ section.settings.color_scheme }}">
+  <div class="newsletter-compact__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="newsletter-compact__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <div class="newsletter-compact__subtext">{{ section.settings.subtext }}</div>
+    {%- endif -%}
+
+    {%- form 'customer', class: 'newsletter-compact__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter-compact__field">
+        <label class="visually-hidden" for="NewsletterCompact-{{ section.id }}">
+          {{ 'blocks.email_signup.label' | t | default: 'Email' }}
+        </label>
+        <input
+          id="NewsletterCompact-{{ section.id }}"
+          class="newsletter-compact__input"
+          type="email"
+          name="contact[email]"
+          value="{{ form.email }}"
+          placeholder="{{ section.settings.placeholder }}"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          required
+        >
+        <button type="submit" class="newsletter-compact__button" name="commit">
+          {{ section.settings.button_label }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter-compact__message newsletter-compact__message--success" tabindex="-1">
+          {{ section.settings.success_message }}
+        </p>
+      {%- elsif form.errors -%}
+        <p class="newsletter-compact__message newsletter-compact__message--error" tabindex="-1">
+          {{ form.errors | default_errors }}
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .newsletter-compact {
+    background-color: var(--color-background, #edebe7);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .newsletter-compact__inner {
+    max-width: 38rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .newsletter-compact__heading {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .newsletter-compact__subtext {
+    margin-block-start: 0.75rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.7);
+  }
+  .newsletter-compact__subtext > :first-child { margin-block-start: 0; }
+  .newsletter-compact__subtext > :last-child { margin-block-end: 0; }
+
+  /* ---------- Integrated pill form (input + button) ---------- */
+  .newsletter-compact__form {
+    margin-block-start: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .newsletter-compact__field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    max-width: 30rem;
+    margin-inline: auto;
+    padding: 0.3rem 0.3rem 0.3rem 1.25rem;
+    border: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.28);
+    border-radius: 999px;
+    background-color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.02);
+  }
+
+  .newsletter-compact__input {
+    flex: 1 1 auto;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.95rem;
+  }
+  .newsletter-compact__input::placeholder {
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.5);
+  }
+  .newsletter-compact__input:focus { outline: none; }
+  .newsletter-compact__field:focus-within {
+    border-color: var(--color-foreground, #1a1a1a);
+  }
+
+  .newsletter-compact__button {
+    flex: none;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--color-foreground, #1a1a1a);
+    color: var(--color-background, #fff);
+    padding: 0.7rem 1.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  @media (hover: hover) {
+    .newsletter-compact__button:hover { opacity: 0.85; }
+  }
+
+  .newsletter-compact__message {
+    margin-block: 0.85rem 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+  .newsletter-compact__message--success { color: var(--color-foreground, #1a1a1a); font-weight: 600; }
+  .newsletter-compact__message--error { color: #b3261e; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter (compact)",
+  "class": "custom-newsletter-compact-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Присъедини се към движението"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>Абонирай се за вдъхновение, новини и ексклузивни оферти — директно в пощата ти.</p>"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Твоят имейл адрес"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Абонирай се"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Благодарим! Вече си част от движението."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter (compact)"
+    }
+  ]
+}
+{% endschema %}

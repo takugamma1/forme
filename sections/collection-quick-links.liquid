@@ -152,32 +152,6 @@
       transition: none;
     }
   }
-
-  /* ===== Main collection product cards — match the custom product grid =====
-     This CSS loads only on the collection page (via this section), so it
-     scopes itself to the collection product grid; search results and product-
-     page recommendation cards are left untouched. Title/price are already
-     left-aligned by the section's block settings. ===== */
-  .product-grid .card-gallery {
-    background-color: #f0efec;
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  .product-grid .price {
-    font-weight: 700;
-  }
-
-  /* 4-up on desktop, 2-up on mobile (default view — the density toggle still works) */
-  @media screen and (min-width: 750px) {
-    .product-grid--grid:not([product-grid-view='zoom-out']) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-  @media screen and (max-width: 749px) {
-    .product-grid--grid:not([product-grid-view='zoom-out']) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
 {% endstylesheet %}
 
 {% schema %}
