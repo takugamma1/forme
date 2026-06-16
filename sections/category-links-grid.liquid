@@ -1,0 +1,214 @@
+{%- comment -%}
+  Category Links Grid — sections/category-links-grid.liquid
+  A 6-up grid of category cards on desktop, a horizontal scroll-snap slider on
+  mobile. Each card: light-grey rounded panel with a contained image, a centred
+  uppercase title, and a small arrow. Block-driven (image, title, link) so any
+  number of categories can be added. BEM styles + schema below.
+{%- endcomment -%}
+
+{%- capture arrow_r -%}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>{%- endcapture -%}
+
+<section
+  class="category-grid color-{{ section.settings.color_scheme }}"
+  style="--cat-radius: {{ section.settings.card_corner_radius | default: 16 }}px;"
+>
+  {%- if section.blocks.size > 0 -%}
+    <ul class="category-grid__grid" role="list">
+      {%- for block in section.blocks -%}
+        <li class="category-grid__item" {{ block.shopify_attributes }}>
+          <a class="category-grid__card" href="{{ block.settings.link | default: '#' }}">
+            <div class="category-grid__media">
+              {%- if block.settings.image != blank -%}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '(min-width: 750px) 15vw, 42vw',
+                    widths: '200, 300, 420, 600',
+                    class: 'category-grid__image',
+                    alt: block.settings.title
+                }}
+              {%- else -%}
+                {%- capture phn -%}{% cycle 'cph': 'product-1', 'product-2', 'product-3', 'product-4' %}{%- endcapture -%}
+                {{ phn | placeholder_svg_tag: 'category-grid__image category-grid__image--ph' }}
+              {%- endif -%}
+            </div>
+            <div class="category-grid__caption">
+              {%- if block.settings.title != blank -%}
+                <span class="category-grid__title">{{ block.settings.title }}</span>
+              {%- endif -%}
+              <span class="category-grid__arrow" aria-hidden="true">{{ arrow_r }}</span>
+            </div>
+          </a>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .category-grid {
+    --cat-gutter: clamp(1rem, 4vw, 4rem);
+
+    background-color: var(--color-background, #edebe7);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(1.5rem, 3vw, 3rem);
+    padding-inline: var(--cat-gutter);
+  }
+
+  /* ---------- Mobile: horizontal scroll-snap slider ---------- */
+  .category-grid__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: clamp(0.6rem, 1.5vw, 1rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-block-end: 0.25rem;
+  }
+  .category-grid__grid::-webkit-scrollbar { display: none; }
+
+  .category-grid__item {
+    flex: 0 0 auto;
+    width: min(42vw, 180px);
+    scroll-snap-align: start;
+  }
+
+  .category-grid__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    background-color: #f0efec;
+    border-radius: var(--cat-radius, 16px);
+    padding: clamp(0.85rem, 1.6vw, 1.25rem);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s ease;
+  }
+
+  .category-grid__media {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .category-grid__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .category-grid__image--ph { opacity: 0.5; }
+
+  .category-grid__caption {
+    margin-block-start: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .category-grid__title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .category-grid__arrow {
+    display: inline-flex;
+    color: inherit;
+    transition: transform 0.25s ease;
+  }
+
+  @media (hover: hover) {
+    .category-grid__card:hover { transform: translateY(-3px); }
+    .category-grid__card:hover .category-grid__image { transform: scale(1.05); }
+    .category-grid__card:hover .category-grid__arrow { transform: translateX(3px); }
+  }
+
+  .category-grid__card:focus-visible {
+    outline: 2px solid var(--color-foreground, #1a1a1a);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Desktop: 6-up grid ---------- */
+  @media screen and (min-width: 750px) {
+    .category-grid__grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: clamp(0.75rem, 1.5vw, 1.25rem);
+      overflow: visible;
+    }
+    .category-grid__item { width: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .category-grid__card,
+    .category-grid__image,
+    .category-grid__arrow {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Category links grid",
+  "class": "category-links-grid-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "range",
+      "id": "card_corner_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Категория" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category links grid",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Клин" } },
+        { "type": "category", "settings": { "title": "Дълъг ръкав" } },
+        { "type": "category", "settings": { "title": "Тениска" } },
+        { "type": "category", "settings": { "title": "Къс клин" } },
+        { "type": "category", "settings": { "title": "Боди" } },
+        { "type": "category", "settings": { "title": "Потник" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

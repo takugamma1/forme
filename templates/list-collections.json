@@ -39,10 +39,36 @@
     "product_grid": {
       "type": "custom-product-grid",
       "settings": {}
+    },
+    "collection_banner": {
+      "type": "custom-collection-banner",
+      "settings": {}
+    },
+    "category_links": {
+      "type": "category-links-grid",
+      "blocks": {
+        "cat_leggings": { "type": "category", "settings": { "title": "Клин" } },
+        "cat_longsleeve": { "type": "category", "settings": { "title": "Дълъг ръкав" } },
+        "cat_tshirt": { "type": "category", "settings": { "title": "Тениска" } },
+        "cat_shorts": { "type": "category", "settings": { "title": "Къс клин" } },
+        "cat_bodysuit": { "type": "category", "settings": { "title": "Боди" } },
+        "cat_tank": { "type": "category", "settings": { "title": "Потник" } }
+      },
+      "block_order": [
+        "cat_leggings",
+        "cat_longsleeve",
+        "cat_tshirt",
+        "cat_shorts",
+        "cat_bodysuit",
+        "cat_tank"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "bento_hero",
-    "product_grid"
+    "product_grid",
+    "collection_banner",
+    "category_links"
   ]
 }
