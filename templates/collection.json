@@ -1,8 +1,22 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "collection_hero": {
       "type": "custom-collection-hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/women-training.png",
+        "section_height": 70,
+        "overlay_opacity": 45,
+        "fallback_heading": "Колекция"
+      }
     },
     "quick_links": {
       "type": "collection-quick-links",
@@ -10,25 +24,29 @@
         "ql_new": {
           "type": "link",
           "settings": {
-            "title": "Нови"
+            "title": "Нови",
+            "link": ""
           }
         },
         "ql_tops": {
           "type": "link",
           "settings": {
-            "title": "Топове"
+            "title": "Топове",
+            "link": ""
           }
         },
         "ql_leggings": {
           "type": "link",
           "settings": {
-            "title": "Клинове"
+            "title": "Клинове",
+            "link": ""
           }
         },
         "ql_sets": {
           "type": "link",
           "settings": {
-            "title": "Сетове"
+            "title": "Сетове",
+            "link": ""
           }
         }
       },
@@ -38,7 +56,10 @@
         "ql_leggings",
         "ql_sets"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "card_corner_radius": 12
+      }
     },
     "main-collection": {
       "type": "main-collection",
@@ -129,6 +150,7 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
+                "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -216,6 +238,7 @@
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
         "enable_infinite_scroll": false,
+        "products_per_page": 24,
         "product_grid_width": "full-width",
         "full_width_on_mobile": true,
         "columns_gap_horizontal": 0,
