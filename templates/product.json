@@ -791,10 +791,15 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "gallery": {
+      "type": "custom-asymmetrical-gallery",
+      "settings": {}
     }
   },
   "order": [
     "product-information",
+    "gallery",
     "product_recommendations_UeDczP",
     "collection_list_RGddHj"
   ]

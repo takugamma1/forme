@@ -1,0 +1,246 @@
+{%- comment -%}
+  Custom Asymmetrical Gallery — sections/custom-asymmetrical-gallery.liquid
+  Centred header (tag / heading / subtext) over a 4-column, 2-row gallery:
+  image 1 spans both rows on the far left; images 2-4 fill row 1 (cols 2-4) and
+  images 5-7 fill row 2 (cols 2-4) via grid auto-flow. Centred footer tag +
+  hashtag. Mobile = 2-column grid with image 1 featured full-width. All text
+  and the 7 images are editable in the schema. BEM styles + schema below.
+{%- endcomment -%}
+
+<section
+  class="asym-gallery color-{{ section.settings.color_scheme }}"
+  style="--ag-radius: {{ section.settings.corner_radius | default: 12 }}px;"
+>
+  {%- if section.settings.top_tag != blank or section.settings.heading != blank or section.settings.subtext != blank -%}
+    <div class="asym-gallery__header">
+      {%- if section.settings.top_tag != blank -%}
+        <p class="asym-gallery__tag">{{ section.settings.top_tag }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="asym-gallery__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtext != blank -%}
+        <p class="asym-gallery__subtext">{{ section.settings.subtext }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="asym-gallery__grid">
+    {%- for n in (1..7) -%}
+      {%- assign key = 'image_' | append: n -%}
+      {%- assign img = section.settings[key] -%}
+      <div class="asym-gallery__item asym-gallery__item--{{ n }}">
+        {%- if img != blank -%}
+          {{
+            img
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 750px) 25vw, 50vw',
+              widths: '300, 450, 600, 800, 1000, 1200',
+              class: 'asym-gallery__image',
+              alt: section.settings.heading
+          }}
+        {%- else -%}
+          {%- capture phn -%}{% cycle 'agph': 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+          {{ phn | placeholder_svg_tag: 'asym-gallery__image asym-gallery__image--ph' }}
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if section.settings.bottom_tag != blank or section.settings.hashtag != blank -%}
+    <div class="asym-gallery__footer">
+      {%- if section.settings.bottom_tag != blank -%}
+        <p class="asym-gallery__tag">{{ section.settings.bottom_tag }}</p>
+      {%- endif -%}
+      {%- if section.settings.hashtag != blank -%}
+        <p class="asym-gallery__hashtag">{{ section.settings.hashtag }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  .asym-gallery {
+    --ag-gutter: clamp(1rem, 4vw, 4rem);
+
+    background-color: var(--color-background, #f4f1ec);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    padding-inline: var(--ag-gutter);
+  }
+
+  /* ---------- Header ---------- */
+  .asym-gallery__header {
+    max-width: 52rem;
+    margin: 0 auto clamp(2rem, 4vw, 3rem);
+    text-align: center;
+  }
+  .asym-gallery__tag {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.6);
+  }
+  .asym-gallery__heading {
+    margin: 0.75rem 0 0;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+  }
+  .asym-gallery__subtext {
+    margin: 0.85rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.7);
+  }
+
+  /* ---------- Grid (mobile: 2-up, image 1 featured full-width) ---------- */
+  .asym-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .asym-gallery__item {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--ag-radius, 12px);
+    overflow: hidden;
+    background-color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.06);
+  }
+  .asym-gallery__item--1 {
+    grid-column: 1 / -1;
+    aspect-ratio: 4 / 3;
+  }
+  .asym-gallery__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .asym-gallery__image--ph { opacity: 0.5; }
+  @media (hover: hover) {
+    .asym-gallery__item:hover .asym-gallery__image { transform: scale(1.04); }
+  }
+
+  /* ---------- Footer ---------- */
+  .asym-gallery__footer {
+    margin-block-start: clamp(2rem, 4vw, 3rem);
+    text-align: center;
+  }
+  .asym-gallery__hashtag {
+    margin: 0.6rem 0 0;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+  }
+
+  /* ---------- Desktop: 4-col, 2-row asymmetrical grid ---------- */
+  @media screen and (min-width: 750px) {
+    .asym-gallery__grid {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: clamp(13rem, 20vw, 19rem) clamp(9rem, 13vw, 12.5rem);
+      gap: 14px;
+    }
+    .asym-gallery__item {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+    /* Image 1: leftmost column, spans both rows */
+    .asym-gallery__item--1 {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      aspect-ratio: auto;
+    }
+    /* Images 2-7 auto-flow into cols 2-4 across rows 1 and 2 */
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .asym-gallery__image { transition: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Asymmetrical gallery",
+  "class": "custom-asymmetrical-gallery-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "top_tag",
+      "label": "Top tag",
+      "default": "ГАЛЕРИЯ"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "СЪЗДАДЕНО ЗА ДВИЖЕНИЕ. НОСЕНО С УВЕРЕНОСТ."
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Истински моменти. Истински жени. Истинска сила."
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Images (1 = tall left, 2-4 = top row, 5-7 = bottom row)"
+    },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" },
+    { "type": "image_picker", "id": "image_4", "label": "Image 4" },
+    { "type": "image_picker", "id": "image_5", "label": "Image 5" },
+    { "type": "image_picker", "id": "image_6", "label": "Image 6" },
+    { "type": "image_picker", "id": "image_7", "label": "Image 7" },
+    {
+      "type": "header",
+      "content": "Footer"
+    },
+    {
+      "type": "text",
+      "id": "bottom_tag",
+      "label": "Bottom tag",
+      "default": "СПОДЕЛИ СВОЯ СТИЛ"
+    },
+    {
+      "type": "text",
+      "id": "hashtag",
+      "label": "Hashtag",
+      "default": "#forme"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Asymmetrical gallery"
+    }
+  ]
+}
+{% endschema %}
