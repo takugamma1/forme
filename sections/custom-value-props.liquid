@@ -6,8 +6,8 @@
   BEM styles + schema below.
 {%- endcomment -%}
 
-<section class="value-props color-{{ section.settings.color_scheme }}">
-  {%- if section.settings.heading != blank -%}
+<section class="value-props color-{{ section.settings.color_scheme }}{% if section.settings.show_vertical_dividers %} value-props--dividers{% endif %}">
+  {%- if section.settings.show_header and section.settings.heading != blank -%}
     <div class="value-props__header">
       <h2 class="value-props__heading">{{ section.settings.heading }}</h2>
       <span class="value-props__rule" aria-hidden="true"></span>
@@ -121,8 +121,8 @@
     .value-props__item:nth-child(5) {
       grid-column: auto;
     }
-    .value-props__item:not(:first-child) {
-      border-inline-start: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.12);
+    .value-props--dividers .value-props__item:not(:last-child) {
+      border-inline-end: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.12);
     }
   }
 {% endstylesheet %}
@@ -146,6 +146,18 @@
       "id": "heading",
       "label": "Heading",
       "default": "ЗАЩО ДА ИЗБЕРЕТЕ НАС"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_header",
+      "label": "Show header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vertical_dividers",
+      "label": "Show vertical dividers (desktop)",
+      "default": false
     }
   ],
   "blocks": [

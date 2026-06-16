@@ -1,0 +1,202 @@
+{%- comment -%}
+  About Story — sections/about-story.liquid
+  Two-column: left (~40%) = tag / uppercase heading / thin rule / body copy;
+  right (~60%) = 3 tall, sharp-cornered images side by side (small gap). Stacks
+  on mobile (text over a horizontal image scroller). All text + 3 images
+  editable. BEM styles + schema below.
+{%- endcomment -%}
+
+<section class="about-story color-{{ section.settings.color_scheme }}">
+  <div class="about-story__inner">
+    <div class="about-story__content">
+      {%- if section.settings.top_tag != blank -%}
+        <p class="about-story__tag">{{ section.settings.top_tag }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="about-story__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      <span class="about-story__rule" aria-hidden="true"></span>
+      {%- if section.settings.body != blank -%}
+        <div class="about-story__body">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="about-story__media">
+      {%- for n in (1..3) -%}
+        {%- assign key = 'image_' | append: n -%}
+        {%- assign img = section.settings[key] -%}
+        <div class="about-story__img-wrap">
+          {%- if img != blank -%}
+            {{
+              img
+              | image_url: width: 900
+              | image_tag:
+                loading: 'lazy',
+                sizes: '(min-width: 750px) 20vw, 60vw',
+                widths: '300, 450, 600, 900',
+                class: 'about-story__image',
+                alt: section.settings.heading
+            }}
+          {%- else -%}
+            {%- capture phn -%}{% cycle 'asph': 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+            {{ phn | placeholder_svg_tag: 'about-story__image about-story__image--ph' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .about-story {
+    --as-gutter: clamp(1.25rem, 5vw, 5rem);
+
+    background-color: var(--color-background, #f4f1ec);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(2.5rem, 5vw, 4.5rem);
+    padding-inline: var(--as-gutter);
+  }
+
+  .about-story__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+
+  /* ---------- Left: text ---------- */
+  .about-story__tag {
+    margin: 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.55);
+  }
+  .about-story__heading {
+    margin: 1.1rem 0 0;
+    max-width: 16ch;
+    font-weight: 300;
+    line-height: 1.18;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+  }
+  .about-story__rule {
+    display: block;
+    width: 3rem;
+    height: 1px;
+    margin: 1.5rem 0;
+    background-color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.4);
+  }
+  .about-story__body {
+    max-width: 40ch;
+    font-size: 0.98rem;
+    line-height: 1.75;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.72);
+  }
+  .about-story__body > :first-child { margin-block-start: 0; }
+  .about-story__body > :last-child { margin-block-end: 0; }
+
+  /* ---------- Right: 3 tall sharp images (mobile = horizontal scroller) ---------- */
+  .about-story__media {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-block-end: 0.25rem;
+  }
+  .about-story__media::-webkit-scrollbar { display: none; }
+
+  .about-story__img-wrap {
+    flex: 0 0 auto;
+    width: min(58vw, 240px);
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    scroll-snap-align: start;
+    background-color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.06);
+  }
+  .about-story__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-story__image--ph { opacity: 0.5; }
+
+  /* ---------- Desktop: 40% text + 60% 3-up image row ---------- */
+  @media screen and (min-width: 750px) {
+    .about-story__inner {
+      grid-template-columns: 2fr 3fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      align-items: stretch;
+      min-height: clamp(26rem, 40vw, 38rem);
+    }
+    .about-story__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .about-story__media {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      overflow: visible;
+    }
+    .about-story__img-wrap {
+      width: auto;
+      aspect-ratio: auto;
+      height: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "About story",
+  "class": "about-story-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "top_tag",
+      "label": "Top tag",
+      "default": "НАШАТА ИСТОРИЯ"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Началото на една идея, родена от личен опит."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>FORME се роди от едно просто прозрение — че истинската увереност идва от движението. Търсехме екипировка, която да издържа на ритъма ни, без да прави компромис със стила.</p><p>Така започна пътят ни: да създаваме активно облекло, което вдъхновява жените да се движат свободно, да се чувстват уверени и да бъдат най-добрата версия на себе си — всеки ден.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2" },
+    { "type": "image_picker", "id": "image_3", "label": "Image 3" }
+  ],
+  "presets": [
+    {
+      "name": "About story"
+    }
+  ]
+}
+{% endschema %}

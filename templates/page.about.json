@@ -3,9 +3,72 @@
     "about_hero": {
       "type": "about-hero",
       "settings": {}
+    },
+    "value_props": {
+      "type": "custom-value-props",
+      "blocks": {
+        "vp_inspired": {
+          "type": "value_prop",
+          "settings": {
+            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4c1.8 2 2.6 4.3 2.6 7-.9.6-1.7.9-2.6.9s-1.7-.3-2.6-.9C9.4 8.3 10.2 6 12 4Z'/><path d='M12 11.9c-1.2-1.6-2.9-2.6-5-3 0 2.6 1.6 4.8 5 5.6'/><path d='M12 11.9c1.2-1.6 2.9-2.6 5-3 0 2.6-1.6 4.8-5 5.6'/><path d='M4 12c1 3 4 5 8 5s7-2 8-5'/></svg>",
+            "title": "ВДЪХНОВЕНИ ОТ ЖЕНИ КАТО ТЕБ",
+            "description": "Създаваме за жени, които се стремят към повече във всяка сфера от живота."
+          }
+        },
+        "vp_fabric": {
+          "type": "value_prop",
+          "settings": {
+            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M3 8c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0'/><path d='M3 12c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0'/><path d='M3 16c2-1.5 4-1.5 6 0s4 1.5 6 0 4-1.5 6 0'/></svg>",
+            "title": "ФУНКЦИОНАЛНИ МАТЕРИИ",
+            "description": "Високотехнологични тъкани, които се движат с теб и издържат на всичко."
+          }
+        },
+        "vp_detail": {
+          "type": "value_prop",
+          "settings": {
+            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><path d='M5 19 17 7'/><path d='M14.5 5.5 18.5 9.5'/><path d='M18 6c1.5.5 2.2 1.8 1.8 3.3-.3 1.2-1.4 1.8-2.6 1.4'/></svg>",
+            "title": "ВНИМАНИЕ КЪМ ВСЕКИ ДЕТАЙЛ",
+            "description": "От кройката до последния шев – всичко е създадено с прецизност и грижа."
+          }
+        },
+        "vp_passion": {
+          "type": "value_prop",
+          "settings": {
+            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20s-7-4.5-7-9.5A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 3.5C19 15.5 12 20 12 20Z'/></svg>",
+            "title": "СЪЗДАДЕНИ СЪС СТРАСТ",
+            "description": "Вярваме, че когато обичаш това, което правиш, се усеща във всичко."
+          }
+        },
+        "vp_sustain": {
+          "type": "value_prop",
+          "settings": {
+            "icon": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='12' cy='12' r='8.5'/><path d='M3.5 12h17'/><path d='M12 3.5c2.5 2.3 3.8 5.3 3.8 8.5S14.5 18.2 12 20.5C9.5 18.2 8.2 15.2 8.2 12S9.5 5.8 12 3.5Z'/></svg>",
+            "title": "УСТОЙЧИВОСТ И ОТГОВОРНОСТ",
+            "description": "Произвеждаме отговорно и с мисъл за бъдещето на нашата планета."
+          }
+        }
+      },
+      "block_order": [
+        "vp_inspired",
+        "vp_fabric",
+        "vp_detail",
+        "vp_passion",
+        "vp_sustain"
+      ],
+      "settings": {
+        "show_header": false,
+        "show_vertical_dividers": true,
+        "heading": ""
+      }
+    },
+    "about_story": {
+      "type": "about-story",
+      "settings": {}
     }
   },
   "order": [
-    "about_hero"
+    "about_hero",
+    "value_props",
+    "about_story"
   ]
 }
