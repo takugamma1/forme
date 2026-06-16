@@ -899,6 +899,10 @@
         "vp_5"
       ],
       "settings": {}
+    },
+    "instagram": {
+      "type": "custom-instagram-feed",
+      "settings": {}
     }
   },
   "order": [
@@ -907,6 +911,7 @@
     "faq",
     "product_recommendations_UeDczP",
     "collection_list_RGddHj",
-    "value_props"
+    "value_props",
+    "instagram"
   ]
 }
