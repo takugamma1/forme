@@ -35,9 +35,14 @@
         "card_accessories"
       ],
       "settings": {}
+    },
+    "product_grid": {
+      "type": "custom-product-grid",
+      "settings": {}
     }
   },
   "order": [
-    "bento_hero"
+    "bento_hero",
+    "product_grid"
   ]
 }
