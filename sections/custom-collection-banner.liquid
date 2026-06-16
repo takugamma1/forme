@@ -49,7 +49,7 @@
 {% stylesheet %}
   .collection-banner {
     background-color: var(--color-background, #edebe7);
-    padding-block: clamp(1.5rem, 3vw, 2.5rem);
+    padding-block: clamp(2rem, 3vw, 2.5rem);
     padding-inline: clamp(1rem, 4vw, 4rem);
   }
 
@@ -114,6 +114,10 @@
 
   @media screen and (max-width: 749px) {
     .collection-banner__inner { aspect-ratio: 4 / 5; }
+    /* heading drops to the bottom on mobile — darken the bottom for legibility */
+    .collection-banner__inner::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.58) 0%, rgba(0, 0, 0, 0.18) 46%, rgba(0, 0, 0, 0) 78%);
+    }
     .collection-banner__overlay {
       align-items: flex-end;
       padding-block: clamp(1.5rem, 7vw, 2.5rem);
