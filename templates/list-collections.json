@@ -15,24 +15,30 @@
         "card_women": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/yoga.png",
+            "link": "",
             "text": "Дамска колекция"
           }
         },
         "card_men": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
+            "link": "",
             "text": "Мъжка колекция"
           }
         },
         "card_new": {
           "type": "card",
           "settings": {
+            "link": "",
             "text": "Нова колекция"
           }
         },
         "card_accessories": {
           "type": "card",
           "settings": {
+            "link": "",
             "text": "Аксесоари"
           }
         }
@@ -43,25 +49,86 @@
         "card_new",
         "card_accessories"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "heading": "Движение с лекота, сила с всяка стъпка.",
+        "paragraph": "<p>Активно облекло, създадено за комфорт, представяне и увереност – навсякъде, където те отведе денят.</p>",
+        "button_1_label": "Пазарувай сега",
+        "button_1_link": "",
+        "button_2_label": "Колекция 2024",
+        "button_2_link": "",
+        "card_corner_radius": 20,
+        "overlay_opacity": 36
+      }
     },
     "product_grid": {
       "type": "custom-product-grid",
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "heading": "СЪЗДАДЕНИ ЗА ДВИЖЕНИЕ. ПРОЕКТИРАНИ ЗА ТЕБ.",
+        "collection": "",
+        "products_to_show": 4,
+        "link_label": "Виж всички",
+        "link_url": ""
+      }
     },
     "collection_banner": {
       "type": "custom-collection-banner",
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "image": "shopify://shop_images/yoga.png",
+        "image_mobile": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
+        "heading": "Ice Blue Collection",
+        "link": "",
+        "corner_radius": 20
+      }
     },
     "category_links": {
       "type": "category-links-grid",
       "blocks": {
-        "cat_leggings": { "type": "category", "settings": { "title": "Клин" } },
-        "cat_longsleeve": { "type": "category", "settings": { "title": "Дълъг ръкав" } },
-        "cat_tshirt": { "type": "category", "settings": { "title": "Тениска" } },
-        "cat_shorts": { "type": "category", "settings": { "title": "Къс клин" } },
-        "cat_bodysuit": { "type": "category", "settings": { "title": "Боди" } },
-        "cat_tank": { "type": "category", "settings": { "title": "Потник" } }
+        "cat_leggings": {
+          "type": "category",
+          "settings": {
+            "title": "Клин",
+            "link": ""
+          }
+        },
+        "cat_longsleeve": {
+          "type": "category",
+          "settings": {
+            "title": "Дълъг ръкав",
+            "link": ""
+          }
+        },
+        "cat_tshirt": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/girl-training.png",
+            "title": "Тениска",
+            "link": ""
+          }
+        },
+        "cat_shorts": {
+          "type": "category",
+          "settings": {
+            "title": "Къс клин",
+            "link": ""
+          }
+        },
+        "cat_bodysuit": {
+          "type": "category",
+          "settings": {
+            "title": "Боди",
+            "link": ""
+          }
+        },
+        "cat_tank": {
+          "type": "category",
+          "settings": {
+            "title": "Потник",
+            "link": ""
+          }
+        }
       },
       "block_order": [
         "cat_leggings",
@@ -71,7 +138,10 @@
         "cat_bodysuit",
         "cat_tank"
       ],
-      "settings": {}
+      "settings": {
+        "color_scheme": "",
+        "card_corner_radius": 16
+      }
     }
   },
   "order": [
