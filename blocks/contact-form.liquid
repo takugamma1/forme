@@ -1,8 +1,11 @@
-
-
-{% capture submit_button %}
-  {% content_for 'block', type: 'contact-form-submit-button', id: 'submit-button' %}
-{% endcapture %}
+{% comment %}
+  Custom "FORME" contact form block.
+  - Topic selector: native radio inputs styled as cards (active state via CSS :checked / :has, no JS).
+    The selected topic is submitted as contact[Тема] and included in the contact email.
+  - Message form: native Shopify 'contact' form with name / email (required) / phone / message.
+  All copy is editable from the theme editor (Bulgarian defaults). Styling uses the theme's
+  design tokens so it inherits the active color scheme, typography and radii.
+{% endcomment %}
 
 <div
   class="
@@ -31,7 +34,6 @@
         autofocus
       >
         {{- 'icon-error.svg' | inline_asset_content -}}
-
         {{- form.errors.translated_fields.email | capitalize }}
         {{ form.errors.messages.email -}}
       </div>
@@ -48,82 +50,131 @@
       </div>
     {%- endif -%}
 
-    <div class="contact-form__form-row">
-      <label
-        class="visually-hidden"
-        for="ContactForm-name"
-      >
-        {{- 'blocks.contact_form.name' | t -}}
-      </label>
-      <input
-        type="text"
-        id="ContactForm-name"
-        class="contact-form__input"
-        autocomplete="name"
-        name="contact[name]"
-        value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-        placeholder="{{ 'blocks.contact_form.name' | t }}"
-      >
+    {%- if block.settings.show_topics -%}
+      <div class="contact-form__topics">
+        {%- if block.settings.topics_heading != blank -%}
+          <h2 class="contact-form__topics-heading" id="{{ form_id }}-topics-label">
+            {{ block.settings.topics_heading }}
+          </h2>
+        {%- endif -%}
 
-      <label
-        class="visually-hidden"
-        for="ContactForm-email"
-      >
-        {{- 'blocks.contact_form.email' | t -}}
-        <span aria-hidden="true">*</span></label
-      >
-      <input
-        type="email"
-        id="ContactForm-email"
-        class="contact-form__input"
-        autocomplete="email"
-        name="contact[email]"
-        spellcheck="false"
-        autocapitalize="off"
-        value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-        aria-required="true"
-        {% if form.errors contains 'email' and form.id == form_id %}
-          aria-invalid="true"
-          aria-describedby="ContactForm-email-error"
-        {% endif %}
-        placeholder="{{ 'blocks.contact_form.email' | t }}"
-      >
+        <div
+          class="contact-form__topic-grid"
+          role="radiogroup"
+          {% if block.settings.topics_heading != blank %}aria-labelledby="{{ form_id }}-topics-label"{% else %}aria-label="{{ block.settings.topics_heading | escape }}"{% endif %}
+        >
+          {%- for i in (1..5) -%}
+            {%- assign topic_value = block.settings['topic_' | append: i] -%}
+            {%- if topic_value != blank -%}
+              <label class="contact-form__topic">
+                <input
+                  class="contact-form__topic-input"
+                  type="radio"
+                  name="contact[Тема]"
+                  value="{{ topic_value | escape }}"
+                >
+                <span class="contact-form__topic-icon" aria-hidden="true">
+                  {%- case i -%}
+                    {%- when 1 -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9.5" cy="20" r="1.3"/><circle cx="17.5" cy="20" r="1.3"/><path d="M3 4h2l2.2 11a1.4 1.4 0 0 0 1.4 1.1h8a1.4 1.4 0 0 0 1.4-1.1L20.5 8H6.2"/></svg>
+                    {%- when 2 -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5h11v9h-11z"/><path d="M13.5 9h3.6l3.4 3.2v3.3h-7z"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg>
+                    {%- when 3 -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5"/><path d="M12 16h.01"/></svg>
+                    {%- when 4 -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h5"/><path d="M10 2.5v3.3c0 .5-.2 1-.5 1.4L8.2 8.8c-.4.4-.7 1-.7 1.6V20a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5v-9.6c0-.6-.3-1.2-.7-1.6l-1.3-1.6c-.3-.4-.5-.9-.5-1.4V2.5"/><path d="M7.5 12.5h9"/></svg>
+                    {%- when 5 -%}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="7.5" width="18.4" height="12" rx="1.6"/><path d="M8.5 7.5V6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v1.5"/><path d="M2.8 12.5h18.4"/></svg>
+                  {%- endcase -%}
+                </span>
+                <span class="contact-form__topic-label">{{ topic_value }}</span>
+                <span class="contact-form__topic-radio" aria-hidden="true"></span>
+              </label>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="contact-form__message">
+      {%- if block.settings.form_heading != blank -%}
+        <h2 class="contact-form__form-heading">{{ block.settings.form_heading }}</h2>
+      {%- endif -%}
+      {%- if block.settings.form_subtext != blank -%}
+        <p class="contact-form__subtext">{{ block.settings.form_subtext }}</p>
+      {%- endif -%}
+
+      <div class="contact-form__fields">
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="{{ form_id }}-name">
+              {{- block.settings.name_label -}}
+            </label>
+            <input
+              type="text"
+              id="{{ form_id }}-name"
+              class="contact-form__input"
+              autocomplete="name"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            >
+          </div>
+
+          <div class="contact-form__field">
+            <label class="contact-form__label" for="{{ form_id }}-email">
+              {{- block.settings.email_label }} <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="{{ form_id }}-email"
+              class="contact-form__input"
+              autocomplete="email"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              required
+              aria-required="true"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              {% if form.errors contains 'email' and form.id == form_id %}
+                aria-invalid="true"
+                aria-describedby="{{ form_id }}-email-error"
+              {% endif %}
+            >
+          </div>
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="{{ form_id }}-phone">
+            {{- block.settings.phone_label -}}
+          </label>
+          <input
+            type="tel"
+            id="{{ form_id }}-phone"
+            class="contact-form__input"
+            autocomplete="tel"
+            name="contact[phone]"
+            pattern="[0-9\-\+\s\(\)]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+          >
+        </div>
+
+        <div class="contact-form__field">
+          <label class="contact-form__label" for="{{ form_id }}-body">
+            {{- block.settings.message_label -}}
+          </label>
+          <textarea
+            rows="8"
+            id="{{ form_id }}-body"
+            class="contact-form__input contact-form__input--textarea"
+            name="contact[body]"
+          >{{- form.body -}}</textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="contact-form__submit">
+        {{- block.settings.submit_label -}}
+      </button>
     </div>
-
-    <label
-      class="visually-hidden"
-      for="ContactForm-phone"
-    >
-      {{- 'blocks.contact_form.phone' | t -}}
-    </label>
-    <input
-      type="tel"
-      id="ContactForm-phone"
-      class="contact-form__input"
-      autocomplete="tel"
-      name="contact[phone]"
-      pattern="[0-9\-]*"
-      value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-      placeholder="{{ 'blocks.contact_form.phone' | t }}"
-    >
-
-    <label
-      class="visually-hidden"
-      for="ContactForm-body"
-    >
-      {{- 'blocks.contact_form.comment' | t -}}
-    </label>
-    <textarea
-      rows="10"
-      id="ContactForm-body"
-      class="contact-form__input contact-form__input--textarea"
-      name="contact[body]"
-      placeholder="{{ 'blocks.contact_form.comment' | t }}"
-    >
-      {{- form.body -}}
-    </textarea>
-
-    {{ submit_button }}
   {%- endform -%}
 </div>
 
@@ -131,42 +182,254 @@
   .contact-form__form {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-md);
+    gap: 3rem;
+    width: 100%;
   }
 
-  .contact-form__form-row {
+  /* ---------- Topic selector ---------- */
+  .contact-form__topics {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-md);
+  }
 
-    @media screen and (min-width: 750px) {
-      flex-direction: row;
-      align-items: center;
+  .contact-form__topics-heading {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-h2--family, inherit);
+    font-weight: 600;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    letter-spacing: 0.12em;
+    color: var(--color-foreground);
+  }
+
+  .contact-form__topic-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-md, 1rem);
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-form__topic-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
+
+  @media screen and (min-width: 990px) {
+    .contact-form__topic-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .contact-form__topic {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-height: 76px;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
+    border: var(--style-border-width-inputs, 1px) solid var(--color-border);
+    border-radius: var(--style-border-radius-inputs, 8px);
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .contact-form__topic:hover {
+    border-color: var(--color-foreground);
+  }
+
+  .contact-form__topic:has(.contact-form__topic-input:checked) {
+    border-color: var(--color-foreground);
+    box-shadow: inset 0 0 0 1px var(--color-foreground);
+  }
+
+  .contact-form__topic:has(.contact-form__topic-input:focus-visible) {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
+  }
+
+  .contact-form__topic-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .contact-form__topic-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--style-border-radius-inputs, 8px);
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .contact-form__topic-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+  }
+
+  .contact-form__topic-label {
+    flex: 1 1 auto;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-foreground);
+  }
+
+  .contact-form__topic-radio {
+    position: relative;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .contact-form__topic-radio::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    width: 5px;
+    height: 9px;
+    border: solid var(--color-background);
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  .contact-form__topic-input:checked ~ .contact-form__topic-radio {
+    background-color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+
+  .contact-form__topic-input:checked ~ .contact-form__topic-radio::after {
+    opacity: 1;
+  }
+
+  /* ---------- Message form ---------- */
+  .contact-form__message {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-form__form-heading {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-h1--family, inherit);
+    font-weight: 700;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    letter-spacing: 0.01em;
+    color: var(--color-foreground);
+  }
+
+  .contact-form__subtext {
+    margin: -0.75rem auto 0;
+    max-width: 40rem;
+    text-align: center;
+    line-height: 1.5;
+    color: var(--color-foreground);
+    opacity: 0.7;
+  }
+
+  .contact-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md, 1rem);
+  }
+
+  .contact-form__row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-md, 1rem);
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-form__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .contact-form__label {
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-foreground);
   }
 
   .contact-form__input {
     width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--color-input-text);
-    background-color: var(--color-input-background);
-    padding: var(--padding-lg) var(--padding-xl);
-    border-radius: var(--style-border-radius-inputs);
-    border: var(--style-border-width-inputs) solid var(--color-input-border);
+    color: var(--color-input-text, var(--color-foreground));
+    background-color: var(--color-input-background, var(--color-background));
+    padding: var(--padding-lg, 0.85rem) var(--padding-xl, 1.1rem);
+    border-radius: var(--style-border-radius-inputs, 8px);
+    border: var(--style-border-width-inputs, 1px) solid var(--color-input-border, var(--color-border));
+    font: inherit;
     -webkit-font-smoothing: antialiased;
+  }
+
+  .contact-form__input:focus-visible {
+    outline: 2px solid var(--color-foreground);
+    outline-offset: 2px;
   }
 
   .contact-form__input--textarea {
     resize: vertical;
-    min-height: var(--input-textarea-min-height);
+    min-height: 9rem;
   }
 
+  .contact-form__submit {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    padding: var(--padding-lg, 0.9rem) var(--padding-xl, 1.75rem);
+    color: var(--color-primary-button-text, var(--color-background));
+    background-color: var(--color-primary-button-background, var(--color-foreground));
+    border: var(--style-border-width-primary, 1px) solid var(--color-primary-button-border, transparent);
+    border-radius: var(--style-border-radius-buttons, 2px);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .contact-form__submit:hover {
+    color: var(--color-primary-button-hover-text, var(--color-background));
+    background-color: var(--color-primary-button-hover-background, var(--color-primary-hover, var(--color-foreground)));
+  }
+
+  @media screen and (min-width: 750px) {
+    .contact-form__submit {
+      align-self: center;
+    }
+  }
+
+  /* ---------- Status messages ---------- */
   .contact-form__error,
   .contact-form__success {
     display: flex;
     align-items: center;
-    gap: var(--gap-xs);
+    gap: var(--gap-xs, 0.5rem);
   }
 {% endstylesheet %}
 
@@ -175,6 +438,98 @@
   "name": "t:names.contact_form",
   "tag": null,
   "settings": [
+    {
+      "type": "header",
+      "content": "Topic selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_topics",
+      "label": "Show topic selector",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "topics_heading",
+      "label": "Topics heading",
+      "default": "КАК МОЖЕМ ДА ПОМОГНЕМ?"
+    },
+    {
+      "type": "text",
+      "id": "topic_1",
+      "label": "Topic 1 (cart icon)",
+      "default": "Поръчки и Плащане"
+    },
+    {
+      "type": "text",
+      "id": "topic_2",
+      "label": "Topic 2 (truck icon)",
+      "default": "Доставка и Връщане"
+    },
+    {
+      "type": "text",
+      "id": "topic_3",
+      "label": "Topic 3 (alert icon)",
+      "default": "Проблем с поръчка"
+    },
+    {
+      "type": "text",
+      "id": "topic_4",
+      "label": "Topic 4 (bottle icon)",
+      "default": "Продукти"
+    },
+    {
+      "type": "text",
+      "id": "topic_5",
+      "label": "Topic 5 (briefcase icon)",
+      "default": "B2B / Партньорства"
+    },
+    {
+      "type": "header",
+      "content": "Message form"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "ИЗПРАТИ НИ СЪОБЩЕНИЕ"
+    },
+    {
+      "type": "textarea",
+      "id": "form_subtext",
+      "label": "Form subtext",
+      "default": "Не намираш отговора? Пиши ни и ще се свържем с теб възможно най-скоро."
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name field label",
+      "default": "Име"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email field label",
+      "default": "Имейл"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone field label",
+      "default": "Телефонен номер"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message field label",
+      "default": "Съобщение"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button label",
+      "default": "Изпрати съобщение"
+    },
     {
       "type": "select",
       "id": "width",
