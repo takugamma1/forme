@@ -474,37 +474,43 @@
         "instagram_post_Fdc3Xj": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_4223.heic",
+            "url": "https://www.instagram.com/p/DZS50nKtVwV/"
           }
         },
         "instagram_post_AjKrTh": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_20260607_151651_fd81ee65-7737-4344-a098-dbb6d228eb0e.jpg",
+            "url": "https://www.instagram.com/p/DZS5LpgNKLy/"
           }
         },
         "instagram_post_eBTYUz": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_4197.jpg",
+            "url": "https://www.instagram.com/p/DZS4e4wtvnR/"
           }
         },
         "instagram_post_qBnF7F": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_20260607_142000.jpg",
+            "url": "https://www.instagram.com/p/DZUpTRvNMW2/"
           }
         },
         "instagram_post_YweNHg": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_4241.jpg",
+            "url": "https://www.instagram.com/p/DZUs3bVDbjv/?img_index=1"
           }
         },
         "instagram_post_JtCEwP": {
           "type": "instagram_post",
           "settings": {
-            "url": ""
+            "image": "shopify://shop_images/IMG_4242.jpg",
+            "url": "https://www.instagram.com/p/DZUyQAiDfP3/?img_index=1"
           }
         }
       },
@@ -530,24 +536,28 @@
         "value_hrGxtk": {
           "type": "value",
           "settings": {
+            "image": "shopify://shop_images/IMG_20260607_151548.jpg",
             "text": "Strong\nMind\nStrong\nBody"
           }
         },
         "value_JJ3kDh": {
           "type": "value",
           "settings": {
+            "image": "shopify://shop_images/IMG_4224.jpg",
             "text": "Details\nMatter"
           }
         },
         "value_WfTfLM": {
           "type": "value",
           "settings": {
+            "image": "shopify://shop_images/IMG_20260607_153737.jpg",
             "text": "Focus\nDiscipline\nProgress"
           }
         },
         "value_AKxHtj": {
           "type": "value",
           "settings": {
+            "image": "shopify://shop_images/IMG_4229.jpg",
             "text": "Performance\nMeets\nElegance"
           }
         }

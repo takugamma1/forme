@@ -525,13 +525,6 @@
             "question": "От какви материи са изработени продуктите?",
             "answer": "<p>Добавете отговор тук.</p>"
           }
-        },
-        "faq_store": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Имате ли физически магазин?",
-            "answer": "<p>Добавете отговор тук.</p>"
-          }
         }
       },
       "block_order": [
@@ -539,8 +532,7 @@
         "faq_delivery",
         "faq_return",
         "faq_care",
-        "faq_material",
-        "faq_store"
+        "faq_material"
       ],
       "settings": {
         "color_scheme": "",
