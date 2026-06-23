@@ -1,6 +1,6 @@
 {%- comment -%}
   Category Links Grid — sections/category-links-grid.liquid
-  A 6-up grid of category cards on desktop, a horizontal scroll-snap slider on
+  A centered grid of category cards on desktop, a horizontal scroll-snap slider on
   mobile. Each card: light-grey rounded panel with a contained image, a centred
   uppercase title, and a small arrow. Block-driven (image, title, link) so any
   number of categories can be added. BEM styles + schema below.
@@ -141,11 +141,12 @@
     outline-offset: 3px;
   }
 
-  /* ---------- Desktop: 6-up grid ---------- */
+  /* ---------- Desktop: centered grid (column count follows card count) ---------- */
   @media screen and (min-width: 750px) {
     .category-grid__grid {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(120px, 180px));
+      justify-content: center;
       gap: clamp(0.75rem, 1.5vw, 1.25rem);
       overflow: visible;
     }
