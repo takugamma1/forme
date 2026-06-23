@@ -426,7 +426,7 @@
           "type": "tab",
           "settings": {
             "title": "Нови",
-            "collection": ""
+            "collection": "frontpage"
           }
         },
         "tab_NwEair": {
