@@ -15,7 +15,6 @@
         "card_women": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/yoga.png",
             "link": "",
             "text": "Дамска колекция"
           }
@@ -23,7 +22,6 @@
         "card_men": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
             "link": "",
             "text": "Мъжка колекция"
           }
@@ -31,7 +29,6 @@
         "card_new": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/tenis-women.png",
             "link": "",
             "text": "Нова колекция"
           }
@@ -39,7 +36,6 @@
         "card_accessories": {
           "type": "card",
           "settings": {
-            "image": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
             "link": "",
             "text": "Аксесоари"
           }
@@ -78,8 +74,6 @@
       "type": "custom-collection-banner",
       "settings": {
         "color_scheme": "",
-        "image": "shopify://shop_images/yoga.png",
-        "image_mobile": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
         "heading": "Ice Blue Collection",
         "link": "",
         "corner_radius": 20
@@ -91,7 +85,6 @@
         "cat_leggings": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/girl-training.png",
             "title": "Клин",
             "link": ""
           }
@@ -99,39 +92,20 @@
         "cat_longsleeve": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/tenis-women.png",
             "title": "Дълъг ръкав",
-            "link": ""
-          }
-        },
-        "cat_tshirt": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/girl-training.png",
-            "title": "Тениска",
             "link": ""
           }
         },
         "cat_shorts": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/running-women.png",
             "title": "Къс клин",
-            "link": ""
-          }
-        },
-        "cat_bodysuit": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/women-activewear.png",
-            "title": "Боди",
             "link": ""
           }
         },
         "cat_tank": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/women-activewear.png",
             "title": "Потник",
             "link": ""
           }
@@ -140,9 +114,7 @@
       "block_order": [
         "cat_leggings",
         "cat_longsleeve",
-        "cat_tshirt",
         "cat_shorts",
-        "cat_bodysuit",
         "cat_tank"
       ],
       "settings": {
