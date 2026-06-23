@@ -1,0 +1,191 @@
+{%- comment -%}
+  FAQ Template — sections/faq-template.liquid
+  Centred, max-width accordion for a dedicated FAQ page. Light heading over a
+  minimalist list of native <details>/<summary> items (JS-free, accessible)
+  separated by thin lines, with a chevron on the right that rotates on open and
+  a smooth reveal of the answer. Block-driven (question + richtext answer).
+  Fully fluid/responsive. BEM styles + schema below.
+{%- endcomment -%}
+
+{%- capture chevron -%}<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="m6 9 6 6 6-6"/></svg>{%- endcapture -%}
+
+<section class="faq-tpl color-{{ section.settings.color_scheme }}">
+  <div class="faq-tpl__container">
+    {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+      <div class="faq-tpl__header">
+        {%- if section.settings.title != blank -%}
+          <h1 class="faq-tpl__title">{{ section.settings.title }}</h1>
+        {%- endif -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="faq-tpl__subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="faq-tpl__list">
+        {%- for block in section.blocks -%}
+          <details
+            class="faq-tpl__item"
+            {% if forloop.first %}open{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="faq-tpl__summary">
+              <span class="faq-tpl__question">{{ block.settings.question }}</span>
+              <span class="faq-tpl__icon" aria-hidden="true">{{ chevron }}</span>
+            </summary>
+            {%- if block.settings.answer != blank -%}
+              <div class="faq-tpl__answer">{{ block.settings.answer }}</div>
+            {%- endif -%}
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .faq-tpl {
+    background-color: var(--color-background, #f4f1ec);
+    color: var(--color-foreground, #1a1a1a);
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+    padding-inline: clamp(1.25rem, 5vw, 2rem);
+  }
+
+  .faq-tpl__container {
+    max-width: 50rem;
+    margin-inline: auto;
+  }
+
+  /* ---------- Header ---------- */
+  .faq-tpl__header {
+    text-align: center;
+    margin-block-end: clamp(2rem, 4vw, 3.25rem);
+  }
+  .faq-tpl__title {
+    margin: 0;
+    font-weight: 300;
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+  .faq-tpl__subtitle {
+    margin: 1rem 0 0;
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.65);
+  }
+
+  /* ---------- Accordion list ---------- */
+  .faq-tpl__list {
+    border-top: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.14);
+  }
+  .faq-tpl__item {
+    border-bottom: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.14);
+  }
+
+  .faq-tpl__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: clamp(1.1rem, 2.5vw, 1.55rem);
+    cursor: pointer;
+    list-style: none;
+    font-size: clamp(0.98rem, 1.5vw, 1.1rem);
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  .faq-tpl__summary::-webkit-details-marker { display: none; }
+  @media (hover: hover) {
+    .faq-tpl__summary:hover { color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.6); }
+  }
+  .faq-tpl__summary:focus-visible {
+    outline: 2px solid var(--color-foreground, #1a1a1a);
+    outline-offset: 3px;
+  }
+  .faq-tpl__question { flex: 1 1 auto; }
+
+  .faq-tpl__icon {
+    flex: none;
+    display: inline-flex;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.65);
+    transition: transform 0.3s ease;
+  }
+  .faq-tpl__item[open] .faq-tpl__icon {
+    transform: rotate(180deg);
+    color: var(--color-foreground, #1a1a1a);
+  }
+
+  /* ---------- Answer (smooth reveal) ---------- */
+  .faq-tpl__answer {
+    padding-block: 0 clamp(1.1rem, 2.5vw, 1.55rem);
+    max-width: 62ch;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.72);
+    animation: faqReveal 0.3s ease;
+  }
+  .faq-tpl__answer > :first-child { margin-block-start: 0; }
+  .faq-tpl__answer > :last-child { margin-block-end: 0; }
+
+  @keyframes faqReveal {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-tpl__icon { transition: none; }
+    .faq-tpl__answer { animation: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ page",
+  "class": "faq-template-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-2"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "ЧЕСТО ЗАДАВАНИ ВЪПРОСИ"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Всичко, което трябва да знаете, на едно място."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Въпрос" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Добавете отговор тук.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ page",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Какви са сроковете и цените за доставка?", "answer": "<p>Доставяме до 1–3 работни дни в България. Доставката е безплатна за поръчки над определена стойност, която ще видиш в количката.</p>" } },
+        { "type": "question", "settings": { "question": "Мога ли да върна или заменя продукт?", "answer": "<p>Да — разполагаш с 14 дни да върнеш или замениш артикул в оригиналното му състояние, с етикети и опаковка.</p>" } },
+        { "type": "question", "settings": { "question": "От какви материи са продуктите и как да се грижа за тях?", "answer": "<p>Използваме висококачествени технологични тъкани. Препоръчваме пране на 30°C, без избелване и без сушилня, за да запазиш формата и цвета.</p>" } },
+        { "type": "question", "settings": { "question": "Как да избера правилния размер?", "answer": "<p>На всяка продуктова страница ще намериш таблица с размери. Ако се колебаеш между два размера, избери по-големия за по-свободно усещане.</p>" } },
+        { "type": "question", "settings": { "question": "Какви методи на плащане приемате?", "answer": "<p>Приемаме плащане с карта (Visa/Mastercard) и наложен платеж при доставка. Всички онлайн плащания са защитени със SSL криптиране.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
