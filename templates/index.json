@@ -156,16 +156,17 @@
           "type": "slide",
           "settings": {
             "video": "shopify://files/videos/02_Forme_Reel-Multiple-Random-Cinematic_1080p-Optimized_d5f97702-a71c-4b3e-937b-2220f6375992.mp4",
-            "heading": "Силата е твоята",
+            "heading": "Силата е твоя",
             "description": "Създадени за всяка твоя тренировка. Увереност, комфорт и свобода да се движиш точно както искаш.",
             "cta_label": "Разгледай колекцията",
-            "cta_url": ""
+            "cta_url": "shopify://collections/court"
           }
         },
         "slide_E9E4kz": {
           "type": "slide",
+          "disabled": true,
           "settings": {
-            "heading": "Силата е твоята",
+            "heading": "Силата е твоя!",
             "description": "Създадени за всяка твоя тренировка. Увереност, комфорт и свобода да се движиш точно както искаш.",
             "cta_label": "Разгледай колекцията",
             "cta_url": ""
@@ -174,10 +175,11 @@
         "slide_aeNegi": {
           "type": "slide",
           "settings": {
-            "heading": "Създадена за движение",
+            "image": "shopify://shop_images/IMG_4228.jpg",
+            "heading": "Създадени за движение",
             "description": "Премиум активно облекло, което се движи с теб — на тренировка и извън нея.",
             "cta_label": "Разгледай колекцията",
-            "cta_url": ""
+            "cta_url": "shopify://collections/pilates"
           }
         },
         "promo_fNgBJe": {
@@ -302,7 +304,7 @@
       "name": "Category showcase",
       "settings": {
         "logo": "shopify://shop_images/Logo_Design_b97774e9-0777-4885-8712-2d67213da674.png",
-        "logo_width": 80,
+        "logo_width": 56,
         "heading": "<strong>SHOp by activity</strong>",
         "subheading": "",
         "color_scheme": "",
@@ -368,7 +370,7 @@
           "type": "tab",
           "settings": {
             "title": "Екипи",
-            "collection": ""
+            "collection": "sets"
           }
         },
         "tab_d8w66R": {
@@ -396,7 +398,7 @@
       "settings": {
         "logo_width": 160,
         "heading": "Essentials",
-        "description": "<p>Основите на твоя гардероб.<br/>Създадени да се движиш. Създадени да останат.</p>",
+        "description": "<p>Основите на твоя гардероб.<br/>Създадени да се движиш. Създадени да издържат.</p>",
         "view_all_label": "Виж всички",
         "products_to_show": 4,
         "color_scheme": ""
@@ -525,7 +527,7 @@
       "name": "Instagram feed",
       "settings": {
         "logo_width": 160,
-        "heading": "Последвай ни",
+        "heading": "TAG US ON INSTAGRAM",
         "description": "<p>Сподели твоят <strong>#stateofmind</strong>. Покажи ни твоя стил!</p>",
         "color_scheme": ""
       }
