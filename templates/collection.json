@@ -12,7 +12,6 @@
     "collection_hero": {
       "type": "custom-collection-hero",
       "settings": {
-        "image": "shopify://shop_images/women-training.png",
         "section_height": 70,
         "overlay_opacity": 45,
         "fallback_heading": "Колекция"
@@ -24,7 +23,6 @@
         "ql_new": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/yoga.png",
             "title": "Нови",
             "link": ""
           }
@@ -32,7 +30,6 @@
         "ql_tops": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/girl-training.png",
             "title": "Топове",
             "link": ""
           }
@@ -40,7 +37,6 @@
         "ql_leggings": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/running-women.png",
             "title": "Клинове",
             "link": ""
           }
@@ -48,7 +44,6 @@
         "ql_sets": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/pilates.png",
             "title": "Сетове",
             "link": ""
           }
@@ -245,11 +240,11 @@
         "products_per_page": 24,
         "product_grid_width": "full-width",
         "full_width_on_mobile": true,
-        "columns_gap_horizontal": 0,
+        "columns_gap_horizontal": 10,
         "columns_gap_vertical": 16,
         "padding-inline-start": 0,
         "padding-inline-end": 0,
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding-block-start": 0,
         "padding-block-end": 24
       }
@@ -264,7 +259,6 @@
         "button_label": "Абонирай се",
         "trust_text": "Без спам. Само новини, които си заслужават.",
         "success_message": "Благодарим! Вече си част от движението.",
-        "image": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
         "hide_image_mobile": false
       }
     }
