@@ -314,6 +314,7 @@
         "slide_L8xVUf": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/IMG_4240.jpg",
             "heading": "Функционални екипи, които работят за теб – във всяко повторение.",
             "button_label": "Пазарувай фитнес",
             "button_link": ""
@@ -322,6 +323,7 @@
         "slide_974FMJ": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/IMG_20260607_142223.jpg",
             "heading": "Създадена за движение – тренирай без компромис.",
             "button_label": "Пазарувай фитнес",
             "button_link": ""
@@ -330,6 +332,7 @@
         "slide_i6Ek9T": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/IMG_4230.jpg",
             "heading": "Сила, която носиш със себе си – ден след ден.",
             "button_label": "Пазарувай фитнес",
             "button_link": ""
@@ -356,6 +359,7 @@
         "block_LkUTca": {
           "type": "block",
           "settings": {
+            "image": "shopify://shop_images/IMG_4226.jpg",
             "text_style": "large",
             "subheading": "Summer",
             "heading": "State of mind",
@@ -367,6 +371,7 @@
         "block_x9pmbb": {
           "type": "block",
           "settings": {
+            "image": "shopify://shop_images/IMG_20260607_152639.jpg",
             "text_style": "small",
             "subheading": "",
             "heading": "Do not disturb",
@@ -378,6 +383,7 @@
         "block_CJebXC": {
           "type": "block",
           "settings": {
+            "image": "shopify://shop_images/IMG_4241.jpg",
             "text_style": "small",
             "subheading": "",
             "heading": "",
@@ -389,6 +395,7 @@
         "block_LfNYw6": {
           "type": "block",
           "settings": {
+            "image": "shopify://shop_images/IMG_4229.jpg",
             "text_style": "small",
             "subheading": "",
             "heading": "Made for anywhere",
