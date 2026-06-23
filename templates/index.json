@@ -300,9 +300,10 @@
       ],
       "name": "Category showcase",
       "settings": {
-        "logo_width": 120,
-        "heading": "<strong>Всичко,</strong> от което брандът ти има нужда, за <strong>да расте</strong>",
-        "subheading": "<p>В forme създаваме стратегически бранд идентичности, визуални системи и креативни посоки – за да отличим твоя бранд и да постигнем реални резултати.</p>",
+        "logo": "shopify://shop_images/Logo_Design_b97774e9-0777-4885-8712-2d67213da674.png",
+        "logo_width": 80,
+        "heading": "<strong>Текст</strong>",
+        "subheading": "<p>текст</p>",
         "color_scheme": "",
         "card_corner_radius": 24
       }
