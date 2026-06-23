@@ -354,6 +354,54 @@
         "autoplay_interval": 6
       }
     },
+    "essentials_tabs_jEwNNz": {
+      "type": "essentials-tabs",
+      "blocks": {
+        "tab_dfg7Nc": {
+          "type": "tab",
+          "settings": {
+            "title": "Нови",
+            "collection": "frontpage"
+          }
+        },
+        "tab_NwEair": {
+          "type": "tab",
+          "settings": {
+            "title": "Екипи",
+            "collection": ""
+          }
+        },
+        "tab_d8w66R": {
+          "type": "tab",
+          "settings": {
+            "title": "Най-продавани",
+            "collection": ""
+          }
+        },
+        "tab_YVMjTy": {
+          "type": "tab",
+          "settings": {
+            "title": "Подбрано за теб",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_dfg7Nc",
+        "tab_NwEair",
+        "tab_d8w66R",
+        "tab_YVMjTy"
+      ],
+      "name": "Essentials tabs",
+      "settings": {
+        "logo_width": 160,
+        "heading": "Essentials",
+        "description": "<p>Основите на твоя гардероб.<br/>Създадени да се движиш. Създадени да останат.</p>",
+        "view_all_label": "Виж всички",
+        "products_to_show": 4,
+        "color_scheme": ""
+      }
+    },
     "lookbook_bento_P64W69": {
       "type": "lookbook-bento",
       "blocks": {
@@ -418,54 +466,6 @@
         "border_radius": 24,
         "gap": 8,
         "overlay_opacity": 30
-      }
-    },
-    "essentials_tabs_jEwNNz": {
-      "type": "essentials-tabs",
-      "blocks": {
-        "tab_dfg7Nc": {
-          "type": "tab",
-          "settings": {
-            "title": "Нови",
-            "collection": "frontpage"
-          }
-        },
-        "tab_NwEair": {
-          "type": "tab",
-          "settings": {
-            "title": "Екипи",
-            "collection": ""
-          }
-        },
-        "tab_d8w66R": {
-          "type": "tab",
-          "settings": {
-            "title": "Най-продавани",
-            "collection": ""
-          }
-        },
-        "tab_YVMjTy": {
-          "type": "tab",
-          "settings": {
-            "title": "Подбрано за теб",
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "tab_dfg7Nc",
-        "tab_NwEair",
-        "tab_d8w66R",
-        "tab_YVMjTy"
-      ],
-      "name": "Essentials tabs",
-      "settings": {
-        "logo_width": 160,
-        "heading": "Essentials",
-        "description": "<p>Основите на твоя гардероб.<br/>Създадени да се движиш. Създадени да останат.</p>",
-        "view_all_label": "Виж всички",
-        "products_to_show": 4,
-        "color_scheme": ""
       }
     },
     "instagram_feed_geRxeK": {
@@ -580,8 +580,8 @@
     "hero_slider_QAehre",
     "category_showcase_XDcc4c",
     "discover_strength_hcWK8X",
-    "lookbook_bento_P64W69",
     "essentials_tabs_jEwNNz",
+    "lookbook_bento_P64W69",
     "instagram_feed_geRxeK",
     "brand_values_QAhbri"
   ]
