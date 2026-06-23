@@ -17,8 +17,7 @@
         "heading": "Създаден за движение. Носен с увереност.",
         "paragraph": "<p>FORME е повече от активен стил. Това е начин на живот – баланс между движение, дисциплина и вътрешна сила.</p>",
         "button_label": "НАШАТА ИСТОРИЯ",
-        "button_link": "",
-        "image": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png"
+        "button_link": ""
       }
     },
     "value_props": {
@@ -85,31 +84,28 @@
         "color_scheme": "",
         "top_tag": "НАШАТА ИСТОРИЯ",
         "heading": "Началото на една идея, родена от личен опит.",
-        "body": "<p>FORME се роди от едно просто прозрение — че истинската увереност идва от движението. Търсехме екипировка, която да издържа на ритъма ни, без да прави компромис със стила.</p><p>Така започна пътят ни: да създаваме активно облекло, което вдъхновява жените да се движат свободно, да се чувстват уверени и да бъдат най-добрата версия на себе си — всеки ден.</p>",
-        "image_1": "shopify://shop_images/yoga.png",
-        "image_2": "shopify://shop_images/girl-training.png",
-        "image_3": "shopify://shop_images/tenis-women.png"
+        "body": "<p>FORME се роди от едно просто прозрение — че истинската увереност идва от движението. Търсехме екипировка, която да издържа на ритъма ни, без да прави компромис със стила.</p><p>Така започна пътят ни: да създаваме активно облекло, което вдъхновява жените да се движат свободно, да се чувстват уверени и да бъдат най-добрата версия на себе си — всеки ден.</p>"
       }
     },
     "about_community": {
       "type": "about-community",
       "settings": {
         "color_scheme": "",
-        "feature_image": "shopify://shop_images/yoga.png",
+        "feature_image": "shopify://shop_images/IMG_4230.heic",
         "tag": "ПОВЕЧЕ ОТ МАРКА",
         "heading": "FORME е общност.",
         "subtext": "<p>Тук споделяме мотивация, подкрепа и вдъхновение. Защото заедно сме по-силни.</p>",
-        "stat_1_number": "10K+",
+        "stat_1_number": "100+",
         "stat_1_label": "доволни клиенти",
-        "stat_2_number": "3",
-        "stat_2_label": "години развитие",
+        "stat_2_number": "30+",
+        "stat_2_label": "премиум артикула",
         "stat_3_number": "1",
         "stat_3_label": "обща мисия",
-        "image_1": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
-        "image_2": "shopify://shop_images/tenis-women.png",
-        "image_3": "shopify://shop_images/women-activewear.png",
-        "image_4": "shopify://shop_images/running-women.png",
-        "image_5": "shopify://shop_images/pilates.png"
+        "image_1": "shopify://shop_images/IMG_20260607_142223.jpg",
+        "image_2": "shopify://shop_images/IMG_20260607_160152.jpg",
+        "image_3": "shopify://shop_images/IMG_4195.jpg",
+        "image_4": "shopify://shop_images/IMG_4245.jpg",
+        "image_5": "shopify://shop_images/Screenshot_2026-06-10_at_17.09.39.png"
       }
     },
     "instagram_dark": {
@@ -117,14 +113,14 @@
       "settings": {
         "top_tag": "FOLLOW US",
         "heading": "ПОСЛЕДВАЙ НИ В INSTAGRAM",
-        "subtext": "Вдъхновение за движение, баланс и активен начин на живот.",
-        "official_label": "OFFICIAL",
-        "link": "",
-        "image_1": "shopify://shop_images/women-training_fd5db87d-cfce-4ebd-b93c-0c601fbca103.png",
-        "image_2": "shopify://shop_images/yoga.png",
-        "image_3": "shopify://shop_images/tenis-women.png",
-        "image_4": "shopify://shop_images/women-activewear.png",
-        "image_5": "shopify://shop_images/pilates.png"
+        "subtext": "Вдъхновение за увереност, баланс и активен начин на живот.",
+        "official_label": "Join us",
+        "link": "https://www.instagram.com/forme_bg/",
+        "image_1": "shopify://shop_images/IMG_4249.jpg",
+        "image_2": "shopify://shop_images/IMG_20260607_152546.jpg",
+        "image_3": "shopify://shop_images/IMG_20260607_142000.jpg",
+        "image_4": "shopify://shop_images/IMG_4223.heic",
+        "image_5": "shopify://shop_images/IMG_4197.jpg"
       }
     }
   },
