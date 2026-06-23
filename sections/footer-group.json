@@ -48,6 +48,7 @@
         "color_scheme": "",
         "menu_left": "footer",
         "menu_right": "main-menu",
+        "logo": "shopify://shop_images/Logo_Design.png",
         "logo_width": 160,
         "tagline": "<p>Създадени да се движиш.<br/>Създадени да постигнеш.</p>",
         "copyright": "© FORME 2025 | Всички права запазени",
@@ -55,9 +56,7 @@
         "instagram_link": "",
         "tiktok_link": "",
         "pinterest_link": "",
-        "email_address": "",
-        "image_left": "shopify://shop_images/girl-training.png",
-        "image_right": "shopify://shop_images/training-bottle.png"
+        "email_address": ""
       }
     }
   },
