@@ -12,6 +12,7 @@
     "collection_hero": {
       "type": "custom-collection-hero",
       "settings": {
+        "image": "shopify://shop_images/IMG_20260607_151949.jpg",
         "section_height": 70,
         "overlay_opacity": 45,
         "fallback_heading": "Колекция"
@@ -23,37 +24,41 @@
         "ql_new": {
           "type": "link",
           "settings": {
+            "image": "shopify://shop_images/IMG_4230.heic",
             "title": "Нови",
-            "link": ""
-          }
-        },
-        "ql_tops": {
-          "type": "link",
-          "settings": {
-            "title": "Топове",
-            "link": ""
-          }
-        },
-        "ql_leggings": {
-          "type": "link",
-          "settings": {
-            "title": "Клинове",
-            "link": ""
+            "link": "shopify://collections/sets"
           }
         },
         "ql_sets": {
           "type": "link",
           "settings": {
+            "image": "shopify://shop_images/IMG_7155.heic",
             "title": "Сетове",
+            "link": "shopify://collections/sets"
+          }
+        },
+        "ql_leggings": {
+          "type": "link",
+          "settings": {
+            "image": "shopify://shop_images/image00004.jpg",
+            "title": "Клинове",
+            "link": "shopify://collections/клинове"
+          }
+        },
+        "ql_tops": {
+          "type": "link",
+          "settings": {
+            "image": "shopify://shop_images/ChatGPT_Image_Jun_23_2026_04_24_33_PM.png",
+            "title": "Топове",
             "link": ""
           }
         }
       },
       "block_order": [
         "ql_new",
-        "ql_tops",
+        "ql_sets",
         "ql_leggings",
-        "ql_sets"
+        "ql_tops"
       ],
       "settings": {
         "color_scheme": "",
