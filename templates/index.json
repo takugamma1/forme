@@ -187,7 +187,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_4240.jpg",
             "label": "Ново",
-            "url": ""
+            "url": "shopify://collections/court"
           }
         },
         "promo_RRtwQH": {
@@ -195,7 +195,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_20260607_142000.jpg",
             "label": "Нова колекция",
-            "url": ""
+            "url": "shopify://collections/sets"
           }
         },
         "usp_3qGUzT": {
