@@ -253,12 +253,13 @@
       "type": "custom-newsletter-compact",
       "settings": {
         "color_scheme": "",
-        "heading": "Движи се. Вдъхновявай.",
+        "heading": "Движи се уверено.",
         "subtext": "<p>Абонирай се за нашия бюлетин и получавай ранен достъп до нови колекции, специални предложения и вдъхновение за активен живот.</p>",
         "placeholder": "Въведи своя имейл адрес",
         "button_label": "Абонирай се",
         "trust_text": "Без спам. Само новини, които си заслужават.",
         "success_message": "Благодарим! Вече си част от движението.",
+        "image": "shopify://shop_images/IMG_7240.heic",
         "hide_image_mobile": false
       }
     }
