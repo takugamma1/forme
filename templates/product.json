@@ -371,7 +371,7 @@
                     "text_wbGpVU": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>To maintain the beauty and integrity of your purchase, we recommend treating it with care. Simple maintenance practices, such as gentle washing and proper storage, can effectively preserve the longevity of your favorites. We encourage you to refer to the care instructions included with each item, designed to help you keep your purchase in top condition.</p>",
+                        "text": "<p>За да запазиш качеството и вида на продукта, препоръчваме нежно пране на ниска температура и съхранение на сухо място. Следвай инструкциите на етикета след всяка употреба.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -410,7 +410,7 @@
                     "text_hYWKPd": {
                       "type": "text",
                       "settings": {
-                        "text": "<p>Our products are crafted to fit true to size, ensuring that you can confidently select your usual size with ease. Whether you’re looking for a relaxed or tailored fit, our designs are made to complement your unique shape and style.</p>",
+                        "text": "<p>Нашите продукти са изработени така, че да отговарят на вашите размери, което ви гарантира, че можете спокойно и лесно да изберете обичайния си размер. Нашите дизайни са създадени така, че да допълнят вашата уникална форма и стил.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -441,11 +441,41 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "ДОСТАВКА И ВРЪЩАНЕ",
-                    "open_by_default": false,
+                    "open_by_default": true,
                     "icon": "none",
                     "width": 20
                   },
-                  "blocks": {}
+                  "blocks": {
+                    "text_bHpMQb": {
+                      "type": "text",
+                      "name": "t:names.text",
+                      "settings": {
+                        "text": "<p>Очаквайте доставка на вашата поръчка от 2 до 4 работни дни, в зависимост от натовареността.</p>",
+                        "width": "fit-content",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_bHpMQb"
+                  ]
                 }
               },
               "block_order": [
@@ -484,6 +514,11 @@
         "heading": "СЪЗДАДЕНО ЗА ДВИЖЕНИЕ. НОСЕНО С УВЕРЕНОСТ.",
         "subtext": "Истински моменти. Истински жени. Истинска сила.",
         "corner_radius": 12,
+        "image_1": "shopify://shop_images/IMG_7180.heic",
+        "image_2": "shopify://shop_images/IMG_7227.heic",
+        "image_3": "shopify://shop_images/IMG_7126.heic",
+        "image_4": "shopify://shop_images/IMG_7240.heic",
+        "image_5": "shopify://shop_images/IMG_7296.heic",
         "bottom_tag": "СПОДЕЛИ СВОЯ СТИЛ",
         "hashtag": "#forme"
       }
@@ -883,7 +918,7 @@
           "settings": {
             "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 8h9v7.5H4z\"></path><path d=\"M13 10.5h3.6l2.4 2.4v2.6H13z\"></path><circle cx=\"7.5\" cy=\"17.5\" r=\"1.4\"></circle><circle cx=\"16.5\" cy=\"17.5\" r=\"1.4\"></circle><path d=\"M0.5 9.5h2.5M0.5 12h1.8M0.5 14.5h2.5\"></path></svg>",
             "title": "БЪРЗА ДОСТАВКА",
-            "description": "Доставка в рамките на 1-3 работни дни."
+            "description": "Доставка в рамките на 1-4 работни дни."
           }
         },
         "vp_2": {
@@ -909,22 +944,13 @@
             "title": "ПРЕМИУМ КАЧЕСТВО",
             "description": "Висококачествени материи и безкомпромисно изпълнение."
           }
-        },
-        "vp_5": {
-          "type": "value_prop",
-          "settings": {
-            "icon": "<svg viewbox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 13v-1a8 8 0 0 1 16 0v1\"></path><path d=\"M6 13H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h1Z\"></path><path d=\"M18 13h1a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2h-1Z\"></path><path d=\"M19 19a4 3 0 0 1-4 3h-2\"></path></svg>",
-            "title": "НАСРЕЩА СМЕ",
-            "description": "Нашият екип е тук, за да помогне."
-          }
         }
       },
       "block_order": [
         "vp_1",
         "vp_2",
         "vp_3",
-        "vp_4",
-        "vp_5"
+        "vp_4"
       ],
       "settings": {
         "color_scheme": "",
@@ -940,8 +966,12 @@
         "top_tag": "FOLLOW US",
         "heading": "ПОСЛЕДВАЙ НИ В INSTAGRAM",
         "subtext": "Вдъхновение за движение, баланс и активен начин на живот.",
-        "handle": "@forme",
-        "link": ""
+        "handle": "forme_bg",
+        "link": "https://www.instagram.com/forme_bg/",
+        "image_1": "shopify://shop_images/IMG_4249.jpg",
+        "image_2": "shopify://shop_images/IMG_4241.jpg",
+        "image_3": "shopify://shop_images/IMG_4240.jpg",
+        "image_4": "shopify://shop_images/IMG_4197.jpg"
       }
     }
   },
