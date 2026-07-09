@@ -352,7 +352,8 @@
   "shopify": {
     "checkout": {
       "marketing": {
-        "accept_marketing_checkbox_label": "Искам да получавам оферти и промо кодове по имейл."
+        "accept_marketing_checkbox_label": "Искам да получавам оферти и промо кодове по имейл.",
+        "accept_sms_checkbox_label": "Искам да получавам промо кодове и специални оферти чрез SMS"
       }
     }
   }
