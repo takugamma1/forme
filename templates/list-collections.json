@@ -15,22 +15,25 @@
         "card_women": {
           "type": "card",
           "settings": {
-            "link": "",
-            "text": "Дамска колекция"
+            "image": "shopify://shop_images/img-7211heic-31onvg.webp",
+            "link": "shopify://collections/sets",
+            "text": "Спортни сетове"
           }
         },
         "card_men": {
           "type": "card",
           "settings": {
+            "image": "shopify://shop_images/IMG_4227.heic",
             "link": "",
-            "text": "Мъжка колекция"
+            "text": "Бюстиета"
           }
         },
         "card_new": {
           "type": "card",
           "settings": {
-            "link": "",
-            "text": "Нова колекция"
+            "image": "shopify://shop_images/IMG_20260607_153320.jpg",
+            "link": "shopify://collections/клинове",
+            "text": "Клинове"
           }
         },
         "card_accessories": {
@@ -64,18 +67,20 @@
       "settings": {
         "color_scheme": "",
         "heading": "СЪЗДАДЕНИ ЗА ДВИЖЕНИЕ. ПРОЕКТИРАНИ ЗА ТЕБ.",
-        "collection": "ice-collection",
+        "collection": "sets",
         "products_to_show": 4,
         "link_label": "Виж всички",
-        "link_url": "shopify://collections/ice-collection"
+        "link_url": "shopify://collections/sets"
       }
     },
     "collection_banner": {
       "type": "custom-collection-banner",
       "settings": {
         "color_scheme": "",
-        "heading": "Ice Blue Collection",
-        "link": "",
+        "image": "shopify://shop_images/IMG_20260607_160152.jpg",
+        "image_mobile": "shopify://shop_images/Screenshot_2026-06-10_at_17.09.39.png",
+        "heading": "FORME Collection",
+        "link": "shopify://collections",
         "corner_radius": 20
       }
     },
@@ -85,28 +90,32 @@
         "cat_leggings": {
           "type": "category",
           "settings": {
+            "image": "shopify://shop_images/IMG_20260607_153320.jpg",
             "title": "Клин",
-            "link": ""
+            "link": "shopify://collections/клинове"
           }
         },
         "cat_longsleeve": {
           "type": "category",
           "settings": {
-            "title": "Дълъг ръкав",
-            "link": ""
+            "image": "shopify://shop_images/IMG_20260607_155505.jpg",
+            "title": "За Корт",
+            "link": "shopify://collections/court"
           }
         },
         "cat_shorts": {
           "type": "category",
           "settings": {
-            "title": "Къс клин",
-            "link": ""
+            "image": "shopify://shop_images/IMG_7296.webp",
+            "title": "Къси екипи",
+            "link": "shopify://products/forme-active-set-midnight"
           }
         },
         "cat_tank": {
           "type": "category",
           "settings": {
-            "title": "Потник",
+            "image": "shopify://shop_images/IMG_4227.heic",
+            "title": "Бюстие",
             "link": ""
           }
         }
