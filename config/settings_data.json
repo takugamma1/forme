@@ -73,6 +73,32 @@
     "variant_button_radius": 2,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "12914283376487586735": {
+        "type": "shopify://apps/izprati-bg/blocks/cart-button-injector/019c20e5-af50-7781-9ac3-e61ba9940f0f",
+        "disabled": false,
+        "settings": {
+          "enabled": true,
+          "hide_dynamic_checkout_buttons": true,
+          "checkout_flow": "prefilled_cart",
+          "precheckout_template": "shopify",
+          "show_precheckout_payment_method": false,
+          "show_next_step_payment_hint": false,
+          "do_not_require_email": false,
+          "popup_size": "full",
+          "service_points_per_page": 5,
+          "initial_delivery_option_sort": "carrier",
+          "delivery_type_order": "office_locker_address",
+          "show_bgn_price_alongside_eur": false,
+          "browser_geolocation_enabled": true,
+          "pickup_map_enabled": false,
+          "show_company_form": false,
+          "show_additional_text": false,
+          "show_address_line_2": true,
+          "require_city_selection": false
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
