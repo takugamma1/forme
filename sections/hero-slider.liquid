@@ -25,11 +25,27 @@
 -%}
 
 <section
-  class="hero-slider"
+  class="hero-slider hero-slider--triptych"
   aria-roledescription="carousel"
   aria-label="{{ section.settings.accessibility_label | default: 'Hero' | escape }}"
   {%- if section.settings.autoplay %} data-autoplay-interval="{{ section.settings.autoplay_interval | default: 5 | times: 1000 }}"{% endif %}
 >
+  {%- comment -%}
+    ===== DESKTOP TRIPTYCH: the same 9:16 reel three times, frame-synced.
+    Column 1 fades in when playback starts, column 2 at +1s, column 3 at +2s.
+    Sources are attached by JS only on >=750px viewports so mobile never
+    downloads the video; mobile keeps the regular slide media.
+  {%- endcomment -%}
+  <div
+    class="hero-slider__triptych"
+    data-src="{{ 'hero-reel.mp4' | asset_url }}"
+    aria-hidden="true"
+  >
+    <video class="hero-slider__triptych-video" muted playsinline loop preload="none"></video>
+    <video class="hero-slider__triptych-video" muted playsinline loop preload="none"></video>
+    <video class="hero-slider__triptych-video" muted playsinline loop preload="none"></video>
+  </div>
+
   <div class="hero-slider__main">
   {%- comment -%} ===== SLIDES: per-slide full-bleed media + left-aligned content ===== {%- endcomment -%}
   <div class="hero-slider__slides" aria-live="polite">
@@ -255,6 +271,66 @@
     opacity: 1;
     visibility: visible;
     transition: opacity 0.6s ease;
+  }
+
+  /* ---------- Desktop video triptych ---------- */
+  .hero-slider__triptych {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .hero-slider__triptych {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .hero-slider__triptych-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+    }
+
+    .hero-slider__triptych.is-playing .hero-slider__triptych-video {
+      animation: hero-triptych-fade 0.9s ease forwards;
+    }
+
+    .hero-slider__triptych.is-playing .hero-slider__triptych-video:nth-child(2) {
+      animation-delay: 1s;
+    }
+
+    .hero-slider__triptych.is-playing .hero-slider__triptych-video:nth-child(3) {
+      animation-delay: 2s;
+    }
+
+    /* Same readability gradients as the slide media, so heading/CTA stay legible */
+    .hero-slider__triptych::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.3) 38%, rgba(0, 0, 0, 0) 68%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 38%);
+    }
+
+    /* Videos replace the slide imagery on desktop; mobile keeps the slides */
+    .hero-slider--triptych .hero-slider__media {
+      display: none;
+    }
+  }
+
+  @keyframes hero-triptych-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* ---------- Media + readability overlay ---------- */
@@ -860,6 +936,62 @@
     });
 
     window.HeroSliderController = { initAll: initAll, instances: instances };
+  })();
+</script>
+
+<script>
+  /* Hero triptych: load the reel on desktop only, start all three copies
+     frame-synced, and keep them locked together while looping. */
+  (function () {
+    var wrap = document.querySelector('.hero-slider__triptych');
+    if (!wrap) return;
+
+    var mq = window.matchMedia('(min-width: 750px)');
+    var initialized = false;
+
+    function init() {
+      if (initialized || !mq.matches) return;
+      initialized = true;
+
+      var vids = Array.prototype.slice.call(wrap.querySelectorAll('video'));
+      var src = wrap.getAttribute('data-src');
+      var ready = 0;
+
+      function onReady() {
+        ready += 1;
+        if (ready < vids.length) return;
+
+        var lead = vids[0];
+        for (var i = 1; i < vids.length; i++) vids[i].currentTime = lead.currentTime;
+        vids.forEach(function (v) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        });
+        wrap.classList.add('is-playing');
+
+        /* Correct drift (including around loop restarts) */
+        setInterval(function () {
+          for (var i = 1; i < vids.length; i++) {
+            if (Math.abs(vids[i].currentTime - lead.currentTime) > 0.08) {
+              vids[i].currentTime = lead.currentTime;
+            }
+          }
+        }, 1000);
+      }
+
+      vids.forEach(function (v) {
+        v.addEventListener('canplaythrough', onReady, { once: true });
+        v.src = src;
+        v.load();
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    mq.addEventListener('change', init);
   })();
 </script>
 
