@@ -747,18 +747,10 @@
                     "product_swatches_padding_right": 0
                   },
                   "blocks": {}
-                },
-                "color_variants_card": {
-                  "type": "color-variants",
-                  "settings": {
-                    "show_label": false,
-                    "compact": true
-                  }
                 }
               },
               "block_order": [
                 "product_title_mDe6FU",
-                "color_variants_card",
                 "price_Qww9yQ",
                 "swatches_QtbikB"
               ]
