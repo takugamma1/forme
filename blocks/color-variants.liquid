@@ -62,10 +62,12 @@
     var queueFix = function () {
       if (formeColorFixQueued) return;
       formeColorFixQueued = true;
-      requestAnimationFrame(function () {
+      // setTimeout instead of requestAnimationFrame: rAF is paused in
+      // hidden/background tabs, which would leave the wrong variant selected
+      setTimeout(function () {
         formeColorFixQueued = false;
         formeColorFix();
-      });
+      }, 50);
     };
 
     if (document.readyState === 'loading') {
