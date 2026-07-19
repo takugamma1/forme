@@ -11,9 +11,9 @@
   "current": {
     "logo": "shopify://shop_images/Logo_Design.png",
     "logo_inverse": "shopify://shop_images/Logo_Design_white.png",
-    "logo_height": 79,
-    "logo_height_mobile": 28,
-    "favicon": "shopify://shop_images/f10403d352209ec2d0f685d5d7f17b8d.jpg",
+    "logo_height": 80,
+    "logo_height_mobile": 31,
+    "favicon": "shopify://shop_images/fav_icon_16ab4f4a-6a12-4f02-8522-1bdf53e72197.png",
     "type_body_font": "geist_n4",
     "type_subheading_font": "geist_n5",
     "type_heading_font": "geist_n6",
