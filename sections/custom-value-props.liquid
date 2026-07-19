@@ -111,15 +111,18 @@
     color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.65);
   }
 
-  /* ---------- Desktop: single 5-up row with separators ---------- */
+  /* ---------- Desktop: single centered row, works for any item count ---------- */
   @media screen and (min-width: 750px) {
     .value-props__row {
-      grid-template-columns: repeat(5, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 0;
       align-items: stretch;
     }
-    .value-props__item:nth-child(5) {
-      grid-column: auto;
+    .value-props__item {
+      flex: 0 1 280px;
+      min-width: 200px;
     }
     .value-props--dividers .value-props__item:not(:last-child) {
       border-inline-end: 1px solid rgb(var(--color-foreground-rgb, 26 26 26) / 0.12);

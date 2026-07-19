@@ -212,6 +212,10 @@
         width: 100%;
         max-width: 100%;
         flex-shrink: 0;
+        /* The wrapper is what's visible when media is height-constrained,
+           so the media radius must clip here, not on slideshow-container */
+        border-radius: var(--media-radius, 0);
+        overflow: hidden;
       }
 
       /* Desktop constraint wrapper sizing */

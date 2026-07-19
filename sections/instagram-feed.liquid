@@ -13,7 +13,7 @@
   <div class="instagram-feed__header">
     {%- if logo != blank -%}
       <div class="instagram-feed__logo">
-        {{ logo | image_url: width: 640 | image_tag: loading: 'lazy', class: 'instagram-feed__logo-image', alt: shop.name }}
+        {{ logo | image_url: width: 640 | image_tag: loading: 'lazy', widths: '320, 640', sizes: '(max-width: 749px) 160px, 280px', class: 'instagram-feed__logo-image', alt: shop.name }}
       </div>
     {%- endif -%}
 

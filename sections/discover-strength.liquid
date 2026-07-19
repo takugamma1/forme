@@ -16,12 +16,10 @@
     <div class="discover-strength__track" aria-live="polite">
       {%- for block in section.blocks -%}
         {%- liquid
+          # This section sits mid-page: eager/high-priority loading here
+          # competes with the hero LCP image, so let all slides lazy-load
           assign img_loading = 'lazy'
-          assign img_priority = 'low'
-          if forloop.first
-            assign img_loading = 'eager'
-            assign img_priority = 'high'
-          endif
+          assign img_priority = 'auto'
         -%}
         <div
           class="discover-strength__slide{% if forloop.first %} is-active{% endif %}"

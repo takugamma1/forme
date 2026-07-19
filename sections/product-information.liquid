@@ -177,6 +177,18 @@
 %}
 
 {% stylesheet %}
+  /* Brand: black add-to-cart on the product page (main button + sticky bar) */
+  .product-information .add-to-cart-button,
+  .sticky-add-to-cart__bar .add-to-cart-button,
+  .product-information button.shopify-payment-button__button--unbranded {
+    --color-primary-button-background: #121212;
+    --color-primary-button-text: #ffffff;
+    --color-primary-button-border: #121212;
+    --color-primary-button-hover-background: #2e2e2e;
+    --color-primary-button-hover-text: #ffffff;
+    --color-primary-button-hover-border: #2e2e2e;
+  }
+
   .sticky-add-to-cart__bar {
     position: fixed;
     bottom: 20px;

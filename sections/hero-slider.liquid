@@ -118,11 +118,22 @@
         >
           <span class="hero-slider__promo-media">
             {%- if block.settings.image != blank -%}
+              {%- liquid
+                # Promo cards are above the fold and the first one is the LCP
+                # element on mobile — lazy-loading it delays LCP by ~1.5s
+                assign promo_loading = 'lazy'
+                assign promo_priority = 'auto'
+                if forloop.first
+                  assign promo_loading = 'eager'
+                  assign promo_priority = 'high'
+                endif
+              -%}
               {{
                 block.settings.image
                 | image_url: width: 600
                 | image_tag:
-                  loading: 'lazy',
+                  loading: promo_loading,
+                  fetchpriority: promo_priority,
                   sizes: '(min-width: 750px) 160px, 45vw',
                   widths: '160, 320, 480, 600',
                   class: 'hero-slider__promo-image',
