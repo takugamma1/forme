@@ -174,6 +174,7 @@
         },
         "slide_aeNegi": {
           "type": "slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/IMG_4228.jpg",
             "heading": "Създадени за движение",
@@ -186,7 +187,7 @@
           "type": "promo",
           "settings": {
             "image": "shopify://shop_images/IMG_4240.jpg",
-            "label": "Ново",
+            "label": "Тренировка",
             "url": "shopify://collections/fitness"
           }
         },
@@ -376,14 +377,14 @@
           "type": "tab",
           "settings": {
             "title": "Най-продавани",
-            "collection": ""
+            "collection": "frontpage"
           }
         },
         "tab_YVMjTy": {
           "type": "tab",
           "settings": {
             "title": "Подбрано за теб",
-            "collection": ""
+            "collection": "клинове"
           }
         }
       },
@@ -415,7 +416,7 @@
             "heading": "State of mind",
             "text": "<p>Light on you. Free in every moment.</p>",
             "button_label": "Yoga",
-            "button_link": ""
+            "button_link": "shopify://collections/yoga"
           }
         },
         "block_x9pmbb": {
@@ -537,7 +538,7 @@
         "value_hrGxtk": {
           "type": "value",
           "settings": {
-            "image": "shopify://shop_images/IMG_20260607_151548.jpg",
+            "image": "shopify://shop_images/IMG_4754.webp",
             "text": "Strong\nMind\nStrong\nBody"
           }
         },
