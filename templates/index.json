@@ -270,7 +270,7 @@
             "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><path d=\"M12 4c1.6 2.2 1.6 5.3 0 8.4-1.6-3.1-1.6-6.2 0-8.4Z\"></path><path d=\"M12 12.4C9.7 11 6.5 11 3.8 13.2 6.1 15.4 9.3 15.4 12 12.4Z\"></path><path d=\"M12 12.4c2.3-1.4 5.5-1.4 8.2.8-2.3 2.2-5.5 2.2-8.2-.8Z\"></path><path d=\"M4.5 16.5C7 19 9.5 20 12 20s5-1 7.5-3.5\"></path></svg>",
             "title": "Yoga",
             "description": "Баланс на тялото и ума.",
-            "link": ""
+            "link": "shopify://collections/yoga"
           }
         },
         "category_m8wxjM": {
@@ -280,7 +280,7 @@
             "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\"></rect><path d=\"M7 8v8\"></path><circle cx=\"7\" cy=\"12\" r=\"1.1\"></circle></svg>",
             "title": "Pilates",
             "description": "Контрол, стойка и вътрешна сила.",
-            "link": ""
+            "link": "shopify://collections/pilates"
           }
         },
         "category_PDp6Dt": {
