@@ -212,6 +212,22 @@
           width: min(100%, calc(var(--constrained-height) * {{ block_settings.aspect_ratio }}));
         }
       }
+
+      /* Mobile: re-enable the viewport height limit (disabled in base.css) so media fits on screen */
+      @media screen and (max-width: 749px) {
+        .product-media-container.constrain-height {
+          --viewport-offset: calc(var(--header-height, 70px) + 180px);
+          --constrained-min-height: 280px;
+          --constrained-height: max(var(--constrained-min-height), calc(100svh - var(--viewport-offset)));
+
+          max-height: var(--constrained-height);
+        }
+
+        .product-media-constraint-wrapper {
+          width: min(100%, calc(var(--constrained-height) * {{ block_settings.aspect_ratio }}));
+          margin-inline: auto;
+        }
+      }
     {% endif %}
 
     /* Constrain all deferred-media content to parent bounds when specific aspect ratio is set */
