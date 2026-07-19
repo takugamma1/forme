@@ -98,6 +98,13 @@
           "show_address_line_2": true,
           "require_city_selection": false
         }
+      },
+      "4882414668468358288": {
+        "type": "shopify://apps/izprati-bg/blocks/cart-shipping-calculator/019c20e5-af50-7781-9ac3-e61ba9940f0f",
+        "disabled": false,
+        "settings": {
+          "enabled": true
+        }
       }
     },
     "color_schemes": {
