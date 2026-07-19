@@ -199,6 +199,14 @@
         align-items: center;
       }
 
+      /* Desktop carousel: keep the constrained image against the thumbnail rail
+         instead of floating mid-column with empty space on both sides */
+      @media screen and (min-width: 750px) {
+        .media-gallery--carousel .product-media-container.constrain-height:has(.product-media-constraint-wrapper) {
+          justify-content: flex-start;
+        }
+      }
+
       /* Mobile constraint wrapper sizing - use width-based approach since max-height is disabled */
       .product-media-constraint-wrapper {
         width: 100%;
