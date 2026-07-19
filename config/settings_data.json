@@ -81,7 +81,7 @@
         "settings": {
           "enabled": true,
           "hide_dynamic_checkout_buttons": true,
-          "checkout_flow": "prefilled_cart",
+          "checkout_flow": "draft_order",
           "precheckout_template": "shopify",
           "show_precheckout_payment_method": false,
           "show_next_step_payment_hint": false,
@@ -101,7 +101,7 @@
       },
       "4882414668468358288": {
         "type": "shopify://apps/izprati-bg/blocks/cart-shipping-calculator/019c20e5-af50-7781-9ac3-e61ba9940f0f",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "enabled": true
         }
