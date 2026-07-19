@@ -1,0 +1,115 @@
+{%- doc -%}
+  Color swatches that navigate between sibling color products
+  (colors are separate products in this store, matched by base title).
+{%- enddoc -%}
+
+{%- liquid
+  assign cv_product = closest.product
+-%}
+
+{%- if cv_product != blank -%}
+  <div class="color-variants-block" {{ block.shopify_attributes }}>
+    {% render 'color-siblings',
+      product: cv_product,
+      show_label: block.settings.show_label,
+      compact: block.settings.compact
+    %}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .color-variants-block {
+    width: 100%;
+  }
+
+  .color-variants-block:empty {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  // Keep the hidden internal "Color" option in sync with the product's real
+  // color (from its title) so add-to-cart submits a correctly labeled variant.
+  if (!window.__formeColorSync) {
+    window.__formeColorSync = true;
+
+    var formeColorFix = function () {
+      document.querySelectorAll('variant-picker').forEach(function (vp) {
+        var pid = vp.getAttribute('data-product-id');
+        if (!pid) return;
+        var src = document.querySelector(
+          'color-siblings[data-product-id="' + pid + '"][data-internal-color]'
+        );
+        if (!src) return;
+        var want = src.getAttribute('data-internal-color');
+        vp.querySelectorAll('fieldset').forEach(function (fs) {
+          var colorInput = fs.querySelector(
+            'input[name^="Color-"], input[name^="Цвят-"]'
+          );
+          if (!colorInput) return;
+          var target = Array.prototype.find.call(
+            fs.querySelectorAll('input'),
+            function (i) {
+              return i.value === want;
+            }
+          );
+          if (target && !target.checked) target.click();
+        });
+      });
+    };
+
+    var formeColorFixQueued = false;
+    var queueFix = function () {
+      if (formeColorFixQueued) return;
+      formeColorFixQueued = true;
+      requestAnimationFrame(function () {
+        formeColorFixQueued = false;
+        formeColorFix();
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', queueFix);
+    } else {
+      queueFix();
+    }
+    if (window.customElements) {
+      customElements.whenDefined('variant-picker').then(queueFix);
+    }
+    new MutationObserver(queueFix).observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Цветове (продукти)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Показва кръгчета с цветовете, които водят към продуктите в другите цветове (по общото име на продукта)."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label",
+      "label": "Показвай етикет \"Цвят\"",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "compact",
+      "label": "Компактни (за продуктови карти)",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Цветове (продукти)",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

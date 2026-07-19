@@ -1,0 +1,209 @@
+{%- doc -%}
+  Renders color swatches linking to sibling color products.
+
+  Colors in this store are separate products whose titles share a base name
+  and end with the color, e.g. "Forme Court Bra – Vanilla" / "– Azure".
+  Siblings are discovered by matching the normalized base title across
+  collections.all. Products also carry a leftover internal "Color" option
+  from duplication; that picker is hidden via CSS below and the matching
+  internal value is auto-selected by the script so cart lines stay correct.
+
+  @param {object} product - The product to render swatches for
+  @param {boolean} [show_label] - Show the "Цвят" label row (product page)
+  @param {boolean} [compact] - Smaller swatches for product cards
+{%- enddoc -%}
+
+{%- liquid
+  assign cs_title = product.title | downcase | replace: '—', '-' | replace: '–', '-'
+  assign cs_parts = cs_title | split: '-'
+-%}
+
+{%- if cs_parts.size > 1 -%}
+  {%- liquid
+    assign cs_color_raw = cs_parts | last
+    assign cs_color = cs_color_raw | strip
+    assign cs_base_len = cs_title.size | minus: cs_color_raw.size | minus: 1
+    assign cs_base = cs_title | slice: 0, cs_base_len | strip
+
+    # Map the title color to the leftover internal Color option value so the
+    # hidden picker submits a matching variant (cart line shows the right color)
+    assign cs_internal = ''
+    case cs_color
+      when 'vanilla'
+        assign cs_internal = 'Beige'
+      when 'azure'
+        assign cs_internal = 'Blue'
+      when 'icy' or 'cloud white'
+        assign cs_internal = 'Бял'
+      when 'midnight'
+        assign cs_internal = 'Black'
+      when 'clear girl' or 'clear'
+        assign cs_internal = 'Clear'
+    endcase
+
+    assign cs_has_internal_color = false
+    for cs_opt in product.options
+      if cs_opt == 'Color' or cs_opt == 'Цвят'
+        assign cs_has_internal_color = true
+      endif
+    endfor
+  -%}
+
+  {%- capture cs_swatches -%}
+    {%- liquid
+      assign cs_count = 0
+      assign cs_seen = ','
+    -%}
+    {%- for cs_p in collections.all.products limit: 50 -%}
+      {%- liquid
+        assign cs_pt = cs_p.title | downcase | replace: '—', '-' | replace: '–', '-'
+        assign cs_pparts = cs_pt | split: '-'
+        if cs_pparts.size < 2
+          continue
+        endif
+        assign cs_pcolor_raw = cs_pparts | last
+        assign cs_pcolor = cs_pcolor_raw | strip
+        assign cs_pbase_len = cs_pt.size | minus: cs_pcolor_raw.size | minus: 1
+        assign cs_pbase = cs_pt | slice: 0, cs_pbase_len | strip
+        if cs_pbase != cs_base
+          continue
+        endif
+        assign cs_key = ',' | append: cs_pcolor | append: ','
+        if cs_seen contains cs_key
+          continue
+        endif
+        assign cs_seen = cs_seen | append: cs_pcolor | append: ','
+        assign cs_count = cs_count | plus: 1
+
+        case cs_pcolor
+          when 'vanilla'
+            assign cs_hex = '#e8d8be'
+          when 'azure'
+            assign cs_hex = '#3b66b0'
+          when 'icy'
+            assign cs_hex = '#d7e4ed'
+          when 'midnight'
+            assign cs_hex = '#17171b'
+          when 'cloud white'
+            assign cs_hex = '#f5f4f0'
+          when 'clear girl' or 'clear'
+            assign cs_hex = '#fcfbf8'
+          else
+            assign cs_hex = '#c9c9c9'
+        endcase
+      -%}
+      <a
+        href="{{ cs_p.url }}"
+        class="color-siblings__swatch{% if cs_p.id == product.id %} color-siblings__swatch--current{% endif %}{% unless cs_p.available %} color-siblings__swatch--soldout{% endunless %}"
+        style="--swatch-color: {{ cs_hex }};"
+        title="{{ cs_pcolor | capitalize | escape }}"
+        aria-label="{{ cs_p.title | escape }}"
+        {% if cs_p.id == product.id %}
+          aria-current="page"
+        {% endif %}
+      ></a>
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- if cs_count > 1 -%}
+    <color-siblings
+      class="color-siblings{% if compact %} color-siblings--compact{% endif %}"
+      data-product-id="{{ product.id }}"
+      {% if cs_has_internal_color and cs_internal != blank %}
+        data-internal-color="{{ cs_internal | escape }}"
+      {% endif %}
+    >
+      {%- if show_label -%}
+        <span class="color-siblings__label">
+          Цвят
+          <span class="color-siblings__value">{{ cs_color | capitalize }}</span>
+        </span>
+      {%- endif -%}
+      <span class="color-siblings__list">
+        {{ cs_swatches }}
+      </span>
+    </color-siblings>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  color-siblings {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .color-siblings__label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+
+  .color-siblings__value {
+    opacity: 0.6;
+    letter-spacing: 0.04em;
+  }
+
+  .color-siblings__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .color-siblings__swatch {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: var(--swatch-color, #c9c9c9);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+    flex-shrink: 0;
+    transition: transform 0.15s ease, outline-color 0.15s ease;
+    outline: 1.5px solid transparent;
+    outline-offset: 3px;
+  }
+
+  .color-siblings__swatch:hover {
+    transform: scale(1.12);
+  }
+
+  .color-siblings__swatch--current {
+    outline-color: currentColor;
+  }
+
+  .color-siblings__swatch--soldout {
+    opacity: 0.45;
+    background-image: linear-gradient(
+      135deg,
+      transparent 46%,
+      rgba(0, 0, 0, 0.4) 46%,
+      rgba(0, 0, 0, 0.4) 54%,
+      transparent 54%
+    );
+  }
+
+  .color-siblings--compact .color-siblings__list {
+    gap: 8px;
+  }
+
+  .color-siblings--compact .color-siblings__swatch {
+    width: 15px;
+    height: 15px;
+    outline-offset: 2px;
+    outline-width: 1px;
+  }
+
+  /* Colors navigate between sibling products, so hide the leftover internal
+     "Color" option everywhere (product page, quick-add modals) */
+  .variant-picker fieldset:has(input[name^='Color-']),
+  .variant-picker fieldset:has(input[name^='Цвят-']),
+  .variant-picker .variant-option:has(input[name^='Color-']),
+  .variant-picker .variant-option:has(input[name^='Цвят-']) {
+    display: none;
+  }
+{% endstylesheet %}

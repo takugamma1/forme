@@ -189,10 +189,18 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "color_variants_card": {
+                  "type": "color-variants",
+                  "settings": {
+                    "show_label": false,
+                    "compact": true
+                  }
                 }
               },
               "block_order": [
                 "product_title_WYTktC",
+                "color_variants_card",
                 "price_wGniwi"
               ]
             }

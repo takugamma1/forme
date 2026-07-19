@@ -484,10 +484,18 @@
                 "accordion_row_kmdwc8",
                 "accordion_row_delivery"
               ]
+            },
+            "color_variants_nav": {
+              "type": "color-variants",
+              "settings": {
+                "show_label": true,
+                "compact": false
+              }
             }
           },
           "block_order": [
             "group_8fkkWP",
+            "color_variants_nav",
             "variant_picker_3Nha6V",
             "buy_buttons_NmYpFG",
             "accordion_iWQwkW"
@@ -739,10 +747,18 @@
                     "product_swatches_padding_right": 0
                   },
                   "blocks": {}
+                },
+                "color_variants_card": {
+                  "type": "color-variants",
+                  "settings": {
+                    "show_label": false,
+                    "compact": true
+                  }
                 }
               },
               "block_order": [
                 "product_title_mDe6FU",
+                "color_variants_card",
                 "price_Qww9yQ",
                 "swatches_QtbikB"
               ]

@@ -222,10 +222,18 @@
                     "product_swatches_padding_right": 0
                   },
                   "blocks": {}
+                },
+                "color_variants_card": {
+                  "type": "color-variants",
+                  "settings": {
+                    "show_label": false,
+                    "compact": true
+                  }
                 }
               },
               "block_order": [
                 "product_title_nAkK9K",
+                "color_variants_card",
                 "price_PMxen8",
                 "swatches_eaTVrz"
               ]
