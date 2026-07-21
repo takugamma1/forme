@@ -13,6 +13,7 @@
       "type": "custom-collection-hero",
       "settings": {
         "image": "shopify://shop_images/IMG_20260607_151949.jpg",
+        "image_mobile": "shopify://shop_images/IMG_4754.webp",
         "section_height": 70,
         "overlay_opacity": 45,
         "fallback_heading": "Колекция"
