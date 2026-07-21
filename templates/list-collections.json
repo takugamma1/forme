@@ -32,7 +32,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/IMG_20260607_153320.jpg",
-            "link": "shopify://collections/клинове",
+            "link": "shopify://collections/klinove",
             "text": "Клинове"
           }
         },
@@ -92,7 +92,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_20260607_153320.jpg",
             "title": "Клин",
-            "link": "shopify://collections/клинове"
+            "link": "shopify://collections/klinove"
           }
         },
         "cat_longsleeve": {
