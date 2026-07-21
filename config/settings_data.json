@@ -105,6 +105,11 @@
         "settings": {
           "enabled": true
         }
+      },
+      "2931641061697400762": {
+        "type": "shopify://apps/google-search-console-by-mp/blocks/head-meta/019c4b41-f7c5-7366-86bc-ac95bf831b40",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
