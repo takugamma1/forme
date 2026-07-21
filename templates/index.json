@@ -179,7 +179,7 @@
             "heading": "Създадени за движение",
             "description": "Премиум активно облекло, което се движи с теб — на тренировка и извън нея.",
             "cta_label": "Разгледай колекцията",
-            "cta_url": "shopify://collections/sets"
+            "cta_url": "shopify://collections/sportni-komplekti"
           }
         },
         "promo_fNgBJe": {
@@ -195,7 +195,7 @@
           "settings": {
             "image": "shopify://shop_images/IMG_20260607_142000.jpg",
             "label": "Нова колекция",
-            "url": "shopify://collections/sets"
+            "url": "shopify://collections/sportni-komplekti"
           }
         },
         "usp_3qGUzT": {
@@ -337,7 +337,7 @@
             "image": "shopify://shop_images/IMG_4230.jpg",
             "heading": "Сила, която носиш със себе си – ден след ден.",
             "button_label": "Пазарувай КОМПЛЕКТИ",
-            "button_link": "shopify://collections/sets"
+            "button_link": "shopify://collections/sportni-komplekti"
           }
         }
       },
@@ -369,7 +369,7 @@
           "type": "tab",
           "settings": {
             "title": "Екипи",
-            "collection": "sets"
+            "collection": "sportni-komplekti"
           }
         },
         "tab_d8w66R": {

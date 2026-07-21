@@ -16,7 +16,7 @@
           "type": "card",
           "settings": {
             "image": "shopify://shop_images/img-7211heic-31onvg.webp",
-            "link": "shopify://collections/sets",
+            "link": "shopify://collections/sportni-komplekti",
             "text": "Спортни сетове"
           }
         },
@@ -67,10 +67,10 @@
       "settings": {
         "color_scheme": "",
         "heading": "СЪЗДАДЕНИ ЗА ДВИЖЕНИЕ. ПРОЕКТИРАНИ ЗА ТЕБ.",
-        "collection": "sets",
+        "collection": "sportni-komplekti",
         "products_to_show": 4,
         "link_label": "Виж всички",
-        "link_url": "shopify://collections/sets"
+        "link_url": "shopify://collections/sportni-komplekti"
       }
     },
     "collection_banner": {
