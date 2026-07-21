@@ -52,9 +52,11 @@
   if menu_content_type == 'featured_collections'
     if parent_link.type == 'collection_link'
       assign collection_handles = parent_link.object.handle | append: ','
-    elsif parent_link.type == 'catalog_link' or parent_link.type == 'collections_link'
-      assign collection_handles = 'all' | append: ','
     endif
+    # Note: for catalog / all-collections parents (e.g. "Каталог") we deliberately
+    # do NOT auto-seed an "all products" (Продукти) featured card — it duplicated
+    # the top-level link. Featured cards now come only from real collection_link
+    # children in the menu (e.g. the "Sets" card), which are appended below.
     assign collection_links = parent_link.links | where: 'type', 'collection_link'
     for collection_link in collection_links
       assign collection_handles = collection_handles | append: collection_link.object.handle | append: ','
