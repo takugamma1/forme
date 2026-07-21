@@ -327,8 +327,8 @@
           "settings": {
             "image": "shopify://shop_images/IMG_20260607_142223.jpg",
             "heading": "Създадена за движение – тренирай без компромис.",
-            "button_label": "Пазарувай фитнес",
-            "button_link": ""
+            "button_label": "Пазарувай COURT",
+            "button_link": "shopify://collections/court"
           }
         },
         "slide_i6Ek9T": {
@@ -336,8 +336,8 @@
           "settings": {
             "image": "shopify://shop_images/IMG_4230.jpg",
             "heading": "Сила, която носиш със себе си – ден след ден.",
-            "button_label": "Пазарувай фитнес",
-            "button_link": ""
+            "button_label": "Пазарувай КОМПЛЕКТИ",
+            "button_link": "shopify://collections/sets"
           }
         }
       },
