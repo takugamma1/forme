@@ -46,8 +46,8 @@
       "type": "Footer",
       "settings": {
         "color_scheme": "",
-        "menu_left": "footer",
-        "menu_right": "main-menu",
+        "menu_left": "main-menu",
+        "menu_right": "footer",
         "logo": "shopify://shop_images/Logo_Design.png",
         "logo_width": 160,
         "tagline": "<p>Създадени да се движиш уверено.<br/>Създадени да постигнеш повече.</p>",
