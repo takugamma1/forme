@@ -361,6 +361,15 @@
     "discover_strength_hcWK8X": {
       "type": "discover-strength",
       "blocks": {
+        "slide_974FMJ": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4223.jpg",
+            "heading": "Създадена за движение – тренирай без компромис.",
+            "button_label": "Пазарувай COURT",
+            "button_link": "shopify://collections/court"
+          }
+        },
         "slide_L8xVUf": {
           "type": "slide",
           "settings": {
@@ -370,19 +379,10 @@
             "button_link": "shopify://collections/fitness-drehi"
           }
         },
-        "slide_974FMJ": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/IMG_20260607_142223.jpg",
-            "heading": "Създадена за движение – тренирай без компромис.",
-            "button_label": "Пазарувай COURT",
-            "button_link": "shopify://collections/court"
-          }
-        },
         "slide_i6Ek9T": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/IMG_4230.jpg",
+            "image": "shopify://shop_images/IMG_7336.heic",
             "heading": "Сила, която носиш със себе си – ден след ден.",
             "button_label": "Пазарувай КОМПЛЕКТИ",
             "button_link": "shopify://collections/sportni-komplekti"
@@ -390,8 +390,8 @@
         }
       },
       "block_order": [
-        "slide_L8xVUf",
         "slide_974FMJ",
+        "slide_L8xVUf",
         "slide_i6Ek9T"
       ],
       "name": "Discover strength",
