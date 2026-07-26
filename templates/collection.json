@@ -41,7 +41,7 @@
         "ql_leggings": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/image00004.jpg",
+            "image": "shopify://shop_images/IMG_7646.heic",
             "title": "Клинове",
             "link": "shopify://collections/klinove"
           }
@@ -49,7 +49,7 @@
         "ql_tops": {
           "type": "link",
           "settings": {
-            "image": "shopify://shop_images/IMG_4746.webp",
+            "image": "shopify://shop_images/Forme_Billiard.webp",
             "title": "Топове",
             "link": "shopify://collections/sports-bras"
           }
