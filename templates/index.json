@@ -186,7 +186,7 @@
           "type": "promo",
           "settings": {
             "image": "shopify://shop_images/IMG_4240.jpg",
-            "label": "Тренировка",
+            "label": "за Тренировка",
             "url": "shopify://collections/fitness-drehi"
           }
         },
@@ -238,6 +238,54 @@
         "pagination_label": "Select a slide to display",
         "heading_size_desktop": 110,
         "heading_size_mobile": 44
+      }
+    },
+    "essentials_tabs_jEwNNz": {
+      "type": "essentials-tabs",
+      "blocks": {
+        "tab_dfg7Nc": {
+          "type": "tab",
+          "settings": {
+            "title": "Нови",
+            "collection": "frontpage"
+          }
+        },
+        "tab_NwEair": {
+          "type": "tab",
+          "settings": {
+            "title": "Екипи",
+            "collection": "sportni-komplekti"
+          }
+        },
+        "tab_d8w66R": {
+          "type": "tab",
+          "settings": {
+            "title": "Най-продавани",
+            "collection": "frontpage"
+          }
+        },
+        "tab_YVMjTy": {
+          "type": "tab",
+          "settings": {
+            "title": "Подбрано за теб",
+            "collection": "klinove"
+          }
+        }
+      },
+      "block_order": [
+        "tab_dfg7Nc",
+        "tab_NwEair",
+        "tab_d8w66R",
+        "tab_YVMjTy"
+      ],
+      "name": "Essentials tabs",
+      "settings": {
+        "logo_width": 160,
+        "heading": "Essentials",
+        "description": "<p>🇧🇬 Всички продукти се произвеждат в България, от лично подбрани платове.</p>",
+        "view_all_label": "Виж всички",
+        "products_to_show": 4,
+        "color_scheme": ""
       }
     },
     "category_showcase_XDcc4c": {
@@ -353,54 +401,6 @@
         "overlay_opacity": 55,
         "autoplay": false,
         "autoplay_interval": 6
-      }
-    },
-    "essentials_tabs_jEwNNz": {
-      "type": "essentials-tabs",
-      "blocks": {
-        "tab_dfg7Nc": {
-          "type": "tab",
-          "settings": {
-            "title": "Нови",
-            "collection": "frontpage"
-          }
-        },
-        "tab_NwEair": {
-          "type": "tab",
-          "settings": {
-            "title": "Екипи",
-            "collection": "sportni-komplekti"
-          }
-        },
-        "tab_d8w66R": {
-          "type": "tab",
-          "settings": {
-            "title": "Най-продавани",
-            "collection": "frontpage"
-          }
-        },
-        "tab_YVMjTy": {
-          "type": "tab",
-          "settings": {
-            "title": "Подбрано за теб",
-            "collection": "klinove"
-          }
-        }
-      },
-      "block_order": [
-        "tab_dfg7Nc",
-        "tab_NwEair",
-        "tab_d8w66R",
-        "tab_YVMjTy"
-      ],
-      "name": "Essentials tabs",
-      "settings": {
-        "logo_width": 160,
-        "heading": "Essentials",
-        "description": "<p>Основите на твоя гардероб.<br/>Създадени да се движиш. Създадени да издържат.</p>",
-        "view_all_label": "Виж всички",
-        "products_to_show": 4,
-        "color_scheme": ""
       }
     },
     "lookbook_bento_P64W69": {
@@ -579,9 +579,9 @@
   "order": [
     "media_with_content_aF6TTD",
     "hero_slider_QAehre",
+    "essentials_tabs_jEwNNz",
     "category_showcase_XDcc4c",
     "discover_strength_hcWK8X",
-    "essentials_tabs_jEwNNz",
     "lookbook_bento_P64W69",
     "instagram_feed_geRxeK",
     "brand_values_QAhbri"
