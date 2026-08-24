@@ -475,22 +475,29 @@
         "instagram_post_Fdc3Xj": {
           "type": "instagram_post",
           "settings": {
-            "image": "shopify://shop_images/IMG_4223.heic",
+            "image": "shopify://shop_images/image00003_17dec0e5-350a-4c9e-a32d-1064d7e86317.jpg",
             "url": "https://www.instagram.com/p/DZS50nKtVwV/"
-          }
-        },
-        "instagram_post_AjKrTh": {
-          "type": "instagram_post",
-          "settings": {
-            "image": "shopify://shop_images/IMG_20260607_151651_fd81ee65-7737-4344-a098-dbb6d228eb0e.jpg",
-            "url": "https://www.instagram.com/p/DZS5LpgNKLy/"
           }
         },
         "instagram_post_eBTYUz": {
           "type": "instagram_post",
           "settings": {
-            "image": "shopify://shop_images/IMG_4197.jpg",
+            "image": "shopify://shop_images/image00006.jpg",
             "url": "https://www.instagram.com/p/DZS4e4wtvnR/"
+          }
+        },
+        "instagram_post_AjKrTh": {
+          "type": "instagram_post",
+          "settings": {
+            "image": "shopify://shop_images/image00001_5f94a32d-c166-4984-a8de-48ba6104ba98.jpg",
+            "url": "https://www.instagram.com/p/DZS5LpgNKLy/"
+          }
+        },
+        "instagram_post_YweNHg": {
+          "type": "instagram_post",
+          "settings": {
+            "image": "shopify://shop_images/image00004_0e433c33-bb44-4957-880f-2db41f2f1daf.jpg",
+            "url": "https://www.instagram.com/p/DZUs3bVDbjv/?img_index=1"
           }
         },
         "instagram_post_qBnF7F": {
@@ -500,27 +507,20 @@
             "url": "https://www.instagram.com/p/DZUpTRvNMW2/"
           }
         },
-        "instagram_post_YweNHg": {
-          "type": "instagram_post",
-          "settings": {
-            "image": "shopify://shop_images/IMG_4241.jpg",
-            "url": "https://www.instagram.com/p/DZUs3bVDbjv/?img_index=1"
-          }
-        },
         "instagram_post_JtCEwP": {
           "type": "instagram_post",
           "settings": {
-            "image": "shopify://shop_images/IMG_4242.jpg",
+            "image": "shopify://shop_images/IMG_7852_8c99f61e-9fe5-4781-abe5-907c27974f95.webp",
             "url": "https://www.instagram.com/p/DZUyQAiDfP3/?img_index=1"
           }
         }
       },
       "block_order": [
         "instagram_post_Fdc3Xj",
-        "instagram_post_AjKrTh",
         "instagram_post_eBTYUz",
-        "instagram_post_qBnF7F",
+        "instagram_post_AjKrTh",
         "instagram_post_YweNHg",
+        "instagram_post_qBnF7F",
         "instagram_post_JtCEwP"
       ],
       "name": "Instagram feed",
