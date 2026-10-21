@@ -184,6 +184,7 @@
         },
         "promo_fNgBJe": {
           "type": "promo",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/IMG_4240.jpg",
             "label": "за Тренировка",
@@ -350,65 +351,6 @@
         "card_corner_radius": 24
       }
     },
-    "category_showcase_UjRRUH": {
-      "type": "category-showcase",
-      "blocks": {
-        "category_fd3hei": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/IMG_4227.heic",
-            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\"><path d=\"M6.5 8v8M3.5 10v4M17.5 8v8M20.5 10v4M6.5 12h11\"></path></svg>",
-            "title": "AZURE",
-            "description": "",
-            "link": "shopify://collections/azure"
-          }
-        },
-        "category_WHBgQY": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/IMG_7679.heic",
-            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"13\" cy=\"8\" rx=\"6\" ry=\"7\"></ellipse><path d=\"M8.6 12.6 4 20\"></path><path d=\"M9.5 5l7.5 4.6M12 3.6 17 11\"></path></svg>",
-            "title": "vanilla",
-            "description": "",
-            "link": "shopify://collections/vanilla"
-          }
-        },
-        "category_VhTBhP": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/image00004_0e433c33-bb44-4957-880f-2db41f2f1daf.jpg",
-            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><path d=\"M12 4c1.6 2.2 1.6 5.3 0 8.4-1.6-3.1-1.6-6.2 0-8.4Z\"></path><path d=\"M12 12.4C9.7 11 6.5 11 3.8 13.2 6.1 15.4 9.3 15.4 12 12.4Z\"></path><path d=\"M12 12.4c2.3-1.4 5.5-1.4 8.2.8-2.3 2.2-5.5 2.2-8.2-.8Z\"></path><path d=\"M4.5 16.5C7 19 9.5 20 12 20s5-1 7.5-3.5\"></path></svg>",
-            "title": "Cloud",
-            "description": "",
-            "link": "shopify://collections/cloud"
-          }
-        },
-        "category_dNGLzA": {
-          "type": "category",
-          "settings": {
-            "image": "shopify://shop_images/IMG_7587.heic",
-            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\"></rect><path d=\"M7 8v8\"></path><circle cx=\"7\" cy=\"12\" r=\"1.1\"></circle></svg>",
-            "title": "midnight",
-            "description": "",
-            "link": "shopify://collections/midnight"
-          }
-        }
-      },
-      "block_order": [
-        "category_fd3hei",
-        "category_WHBgQY",
-        "category_VhTBhP",
-        "category_dNGLzA"
-      ],
-      "name": "Color",
-      "settings": {
-        "logo_width": 56,
-        "heading": "<strong>SHOp by color</strong>",
-        "subheading": "",
-        "color_scheme": "",
-        "card_corner_radius": 24
-      }
-    },
     "instagram_feed_geRxeK": {
       "type": "instagram-feed",
       "blocks": {
@@ -514,6 +456,65 @@
         "overlay_opacity": 55,
         "autoplay": false,
         "autoplay_interval": 6
+      }
+    },
+    "category_showcase_UjRRUH": {
+      "type": "category-showcase",
+      "blocks": {
+        "category_fd3hei": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/IMG_4227.heic",
+            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\"><path d=\"M6.5 8v8M3.5 10v4M17.5 8v8M20.5 10v4M6.5 12h11\"></path></svg>",
+            "title": "AZURE",
+            "description": "",
+            "link": "shopify://collections/azure"
+          }
+        },
+        "category_WHBgQY": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/IMG_7679.heic",
+            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><ellipse cx=\"13\" cy=\"8\" rx=\"6\" ry=\"7\"></ellipse><path d=\"M8.6 12.6 4 20\"></path><path d=\"M9.5 5l7.5 4.6M12 3.6 17 11\"></path></svg>",
+            "title": "vanilla",
+            "description": "",
+            "link": "shopify://collections/vanilla"
+          }
+        },
+        "category_VhTBhP": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/image00004_0e433c33-bb44-4957-880f-2db41f2f1daf.jpg",
+            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><path d=\"M12 4c1.6 2.2 1.6 5.3 0 8.4-1.6-3.1-1.6-6.2 0-8.4Z\"></path><path d=\"M12 12.4C9.7 11 6.5 11 3.8 13.2 6.1 15.4 9.3 15.4 12 12.4Z\"></path><path d=\"M12 12.4c2.3-1.4 5.5-1.4 8.2.8-2.3 2.2-5.5 2.2-8.2-.8Z\"></path><path d=\"M4.5 16.5C7 19 9.5 20 12 20s5-1 7.5-3.5\"></path></svg>",
+            "title": "Cloud",
+            "description": "",
+            "link": "shopify://collections/cloud"
+          }
+        },
+        "category_dNGLzA": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/IMG_7587.heic",
+            "icon": "<svg viewbox=\"0 0 24 24\" width=\"32\" height=\"32\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"8\" width=\"18\" height=\"8\" rx=\"4\"></rect><path d=\"M7 8v8\"></path><circle cx=\"7\" cy=\"12\" r=\"1.1\"></circle></svg>",
+            "title": "midnight",
+            "description": "",
+            "link": "shopify://collections/midnight"
+          }
+        }
+      },
+      "block_order": [
+        "category_fd3hei",
+        "category_WHBgQY",
+        "category_VhTBhP",
+        "category_dNGLzA"
+      ],
+      "name": "Color",
+      "settings": {
+        "logo_width": 56,
+        "heading": "<strong>SHOp by color</strong>",
+        "subheading": "",
+        "color_scheme": "",
+        "card_corner_radius": 24
       }
     },
     "lookbook_bento_P64W69": {
