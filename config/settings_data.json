@@ -85,7 +85,6 @@
           "hide_dynamic_checkout_buttons": true,
           "checkout_flow": "draft_order",
           "precheckout_template": "shopify",
-          "show_precheckout_payment_method": false,
           "show_next_step_payment_hint": false,
           "do_not_require_email": false,
           "popup_size": "full",
@@ -125,6 +124,40 @@
         "type": "shopify://apps/sales-discounts/blocks/sale-labels/29205fb1-2e68-4d81-a905-d828a51c8413",
         "disabled": false,
         "settings": {}
+      },
+      "6924378244649376606": {
+        "type": "shopify://apps/tryvio/blocks/tryvio-app-embed/019e5dd5-c97e-7c94-83de-c79f3d4471cf",
+        "disabled": false,
+        "settings": {
+          "product_button_position_mobile": "bottom-right",
+          "product_button_position_desktop": "bottom-right",
+          "button_size_mobile": "auto",
+          "button_label_mode_mobile": "logo_only",
+          "button_scale_mobile": 100,
+          "button_position_mobile": "bottom-right",
+          "button_size_desktop": "medium",
+          "button_label_mode_desktop": "auto",
+          "button_scale_desktop": 100,
+          "button_position_desktop": "bottom-right",
+          "button_label": "Try it on",
+          "button_background": "#111827",
+          "button_text_color": "#ffffff",
+          "corner_radius": 24,
+          "button_width": "full",
+          "button_attention_cue": true,
+          "helper_text": "Upload your photo and preview this product on yourself.",
+          "helper_text_color": "#475569",
+          "surface_background": "#ffffff",
+          "border_color": "#e2e8f0",
+          "show_product_button": true,
+          "cards_collection": "inherit",
+          "cards_home": "inherit",
+          "cards_product_blocks": "inherit",
+          "cards_other_pages": "inherit",
+          "show_collection_button": true,
+          "image_container_selector": "",
+          "custom_css": ""
+        }
       }
     },
     "color_schemes": {
